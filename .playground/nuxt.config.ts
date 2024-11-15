@@ -2,6 +2,13 @@ import defaultTheme from "tailwindcss/defaultTheme";
 
 export default defineNuxtConfig({
   extends: [".."],
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ["shiki/wasm"],
+      },
+    },
+  },
   modules: ["@nuxt/eslint", "@nuxt/fonts", "nuxt-shiki"],
   tailwindcss: {
     config: {
@@ -15,7 +22,16 @@ export default defineNuxtConfig({
     },
   },
   shiki: {
-    bundledLangs: ["js", "ts", "json", "html", "css", "yaml", "vue", "vue-html"],
+    bundledLangs: [
+      "js",
+      "ts",
+      "json",
+      "html",
+      "css",
+      "yaml",
+      "vue",
+      "vue-html",
+    ],
     bundledThemes: ["light-plus", "dark-plus"],
     highlightOptions: {
       themes: {
