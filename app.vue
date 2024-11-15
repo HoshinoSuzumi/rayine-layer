@@ -1,3 +1,4 @@
 <template>
-  <RayButton>Click me!</RayButton>
+  <RayButton>test</RayButton>
+  <RayInput/>
 </template>

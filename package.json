@@ -1,5 +1,5 @@
 {
-  "name": "my-nuxt-layer",
+  "name": "rayine-layer",
   "type": "module",
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
