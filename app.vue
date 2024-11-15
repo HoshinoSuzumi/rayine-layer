@@ -1,3 +1,3 @@
 <template>
-  <HelloWorld />
+  <RayButton>Click me!</RayButton>
 </template>
