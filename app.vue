@@ -2,9 +2,9 @@
 </script>
 
 <template>
-  <div>
-    <RayMessageProvider>
+  <RayMessageProvider>
+    <NuxtLayout>
       <NuxtPage />
-    </RayMessageProvider>
-  </div>
+    </NuxtLayout>
+  </RayMessageProvider>
 </template>

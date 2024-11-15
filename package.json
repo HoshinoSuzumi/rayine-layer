@@ -13,9 +13,11 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "latest",
+    "@nuxt/fonts": "^0.10.2",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "eslint": "^9.14.0",
     "nuxt": "^3.14.159",
+    "nuxt-shiki": "^0.3.0",
     "typescript": "^5.6.3",
     "vue": "latest"
   },
