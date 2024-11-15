@@ -1,4 +1,10 @@
+<script>
+</script>
+
 <template>
-  <RayButton>test</RayButton>
-  <RayInput/>
+  <div>
+    <RayMessageProvider>
+      <NuxtPage />
+    </RayMessageProvider>
+  </div>
 </template>
