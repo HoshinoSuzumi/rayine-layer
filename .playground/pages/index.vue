@@ -1,11 +1,5 @@
 <script lang="ts" setup>
 const message = useMessage();
-
-const count = ref(1)
-
-const info = () => {
-  message.info(`message ${count.value++}`);
-}
 </script>
 
 <template>
@@ -36,11 +30,23 @@ const info = () => {
       </div>
       <div class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
         <div class="p-4 border-b border-neutral-200 dark:border-neutral-700">
-          <button class="bg-indigo-400 text-white border border-indigo-400 px-2 py-0.5 rounded-lg"
-            @click="info">info</button>
+          <div class="flex items-center gap-2">
+            <button class="bg-indigo-400 text-white text-sm border border-indigo-400 px-2.5 py-1 rounded-lg"
+              @click="message.info('message info', 10000)">Info 10s</button>
+            <button class="bg-indigo-400 text-white text-sm border border-indigo-400 px-2.5 py-1 rounded-lg"
+              @click="message.success('message success')">Success</button>
+            <button class="bg-indigo-400 text-white text-sm border border-indigo-400 px-2.5 py-1 rounded-lg"
+              @click="message.warning('message warning')">Warning</button>
+            <button class="bg-indigo-400 text-white text-sm border border-indigo-400 px-2.5 py-1 rounded-lg"
+              @click="message.error('message error')">Error</button>
+          </div>
         </div>
         <div class="p-4">
-          <Shiki class="text-sm" lang="ts" :code="`const message = useMessage();\n\nmessage.info('Hello Rayine');`" />
+          <Shiki class="text-sm" lang="ts" :code="`const message = useMessage();\n
+message.info('message info', 10000);
+message.success('message success');
+message.warning('message warning');
+message.error('message error');`" />
         </div>
       </div>
 
