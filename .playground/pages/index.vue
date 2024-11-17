@@ -32,7 +32,7 @@ const message = useMessage();
       <DocExampleBlock lang="vue-html">
         <div class="flex items-center gap-2">
           <RayButton color="amber">amber</RayButton>
-          <RayButton color="violet" variant="outline">violet</RayButton>
+          <RayButton color="violet" variant="outline" @click="message.success('I like this color!')">violet</RayButton>
           <RayButton color="red" variant="soft">red</RayButton>
           <RayButton color="emerald" variant="ghost">emerald</RayButton>
           <RayButton color="cyan" variant="link">cyan</RayButton>
@@ -94,7 +94,6 @@ const message = useMessage();
           <RayButton @click="message.success('message success')">Success</RayButton>
           <RayButton @click="message.warning('message warning')">Warning</RayButton>
           <RayButton @click="message.error('message error')">Error</RayButton>
-          <RayButton @click="console.log('test')" color="red">Test</RayButton>
         </div>
         <template #code>
           {{ `
