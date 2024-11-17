@@ -31,12 +31,18 @@ export default defineNuxtConfig({
       "yaml",
       "vue",
       "vue-html",
+      "sh",
     ],
-    bundledThemes: ["light-plus", "dark-plus"],
+    bundledThemes: [
+      "light-plus",
+      "dark-plus",
+      "material-theme",
+      "material-theme-lighter",
+    ],
     highlightOptions: {
       themes: {
-        light: "light-plus",
-        dark: "dark-plus",
+        light: "material-theme-lighter",
+        dark: "material-theme",
       },
     },
   },

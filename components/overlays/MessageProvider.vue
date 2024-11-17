@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Message, MessageType } from '../../types/Message';
+import type { Message, MessageType } from '../../types/message';
 
 const props = defineProps({
   max: {

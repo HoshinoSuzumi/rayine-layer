@@ -1,4 +1,4 @@
-import type { MessageApi } from "../types/Message";
+import type { MessageApi } from "../types/message";
 
 export const useMessage = () => {
   const message = inject<MessageApi>("ray-message");

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { MessageProviderApi, Message } from '../../types/Message';
+import type { MessageProviderApi, Message } from '../../types/message';
 
 const providerApi = inject<MessageProviderApi>('ray-message-provider')
 

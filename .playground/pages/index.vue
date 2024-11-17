@@ -3,56 +3,115 @@ const message = useMessage();
 </script>
 
 <template>
-  <div class="flex flex-col items-start gap-12">
+  <div class="flex flex-col items-start gap-16 pb-20">
+    <section>
+      <DocContentBlock title="Button" accent-title />
 
-    <div class="w-full flex flex-col gap-4">
-      <div>
-        <h1 class="font-medium text-xl text-indigo-400">Message</h1>
-        <p class="text-sm">Message component like a toast</p>
-      </div>
+      <DocContentBlock title="Variants" />
+      <DocExampleBlock lang="vue-html">
+        <div class="flex items-center gap-2">
+          <RayButton>Solid</RayButton>
+          <RayButton variant="outline">Outline</RayButton>
+          <RayButton variant="soft">Soft</RayButton>
+          <RayButton variant="ghost">Ghost</RayButton>
+          <RayButton variant="link">Link</RayButton>
+        </div>
+        <template #code>
+          {{ `
+          <template>
+            <RayButton>Solid</RayButton>
+            <RayButton variant="outline">Outline</RayButton>
+            <RayButton variant="soft">Soft</RayButton>
+            <RayButton variant="ghost">Ghost</RayButton>
+            <RayButton variant="link">Link</RayButton>
+          </template>` }}
+        </template>
+      </DocExampleBlock>
 
-      <div class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-        <div class="p-4 py-2 border-b border-neutral-200 dark:border-neutral-700">
-          <span class="flex items-center gap-1">
-            <IconVscodeIconsFileTypeVue class="inline" />
-            <span class="text-sm text-neutral-500 dark:text-neutral-400">app.vue</span>
-          </span>
+      <DocContentBlock title="Colors" />
+      <DocExampleBlock lang="vue-html">
+        <div class="flex items-center gap-2">
+          <RayButton color="amber">amber</RayButton>
+          <RayButton color="violet" variant="outline">violet</RayButton>
+          <RayButton color="red" variant="soft">red</RayButton>
+          <RayButton color="emerald" variant="ghost">emerald</RayButton>
+          <RayButton color="cyan" variant="link">cyan</RayButton>
         </div>
-        <div class="p-4">
-          <Shiki class="text-sm" lang="vue-html" :code="`<template>
-  <RayMessageProvider>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </RayMessageProvider>
-</template>`" />
-        </div>
-      </div>
-      <div class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-        <div class="p-4 border-b border-neutral-200 dark:border-neutral-700">
-          <div class="flex items-center gap-2">
-            <button class="bg-indigo-400 text-white text-sm border border-indigo-400 px-2.5 py-1 rounded-lg"
-              @click="message.info('message info', 10000)">Info 10s</button>
-            <button class="bg-indigo-400 text-white text-sm border border-indigo-400 px-2.5 py-1 rounded-lg"
-              @click="message.success('message success')">Success</button>
-            <button class="bg-indigo-400 text-white text-sm border border-indigo-400 px-2.5 py-1 rounded-lg"
-              @click="message.warning('message warning')">Warning</button>
-            <button class="bg-indigo-400 text-white text-sm border border-indigo-400 px-2.5 py-1 rounded-lg"
-              @click="message.error('message error')">Error</button>
-          </div>
-        </div>
-        <div class="p-4">
-          <Shiki class="text-sm" lang="ts" :code="`const message = useMessage();\n
-message.info('message info', 10000);
-message.success('message success');
-message.warning('message warning');
-message.error('message error');`" />
-        </div>
-      </div>
+        <template #code>
+          {{ `
+          <template>
+            <RayButton color="amber">amber</RayButton>
+            <RayButton color="violet" variant="outline">violet</RayButton>
+            <RayButton color="red" variant="soft">red</RayButton>
+            <RayButton color="emerald" variant="ghost">emerald</RayButton>
+          </template>` }}
+        </template>
+      </DocExampleBlock>
 
-    </div>
+      <DocContentBlock title="Sizes" />
+      <DocExampleBlock lang="vue-html">
+        <div class="flex items-center gap-2 flex-wrap">
+          <RayButton size="2xs">Button</RayButton>
+          <RayButton size="xs">Button</RayButton>
+          <RayButton size="sm">Button</RayButton>
+          <RayButton size="md">Button</RayButton>
+          <RayButton size="lg">Button</RayButton>
+          <RayButton size="xl">Button</RayButton>
+        </div>
+        <template #code>
+          {{ `
+          <template>
+            <RayButton size="2xs">Button</RayButton>
+            <RayButton size="xs">Button</RayButton>
+            <RayButton size="sm">Button</RayButton>
+            <RayButton size="md">Button</RayButton>
+            <RayButton size="lg">Button</RayButton>
+            <RayButton size="xl">Button</RayButton>
+          </template>` }}
+        </template>
+      </DocExampleBlock>
+    </section>
 
+    <section>
+      <DocContentBlock title="Message" description="Message component like a toast" accent-title />
+
+      <DocExampleBlock lang="vue-html" filename="app.vue">
+        <template #code>
+          {{ `
+          <template>
+            <RayMessageProvider>
+              <NuxtLayout>
+                <NuxtPage />
+              </NuxtLayout>
+            </RayMessageProvider>
+          </template>`}}
+        </template>
+      </DocExampleBlock>
+
+      <DocExampleBlock lang="ts">
+        <div class="flex items-center gap-2">
+          <RayButton @click="message.info('message info', 10000)">Info 10s</RayButton>
+          <RayButton @click="message.success('message success')">Success</RayButton>
+          <RayButton @click="message.warning('message warning')">Warning</RayButton>
+          <RayButton @click="message.error('message error')">Error</RayButton>
+          <RayButton @click="console.log('test')" color="red">Test</RayButton>
+        </div>
+        <template #code>
+          {{ `
+          const message = useMessage();
+
+          message.info('message info', 10000);
+          message.success('message success');
+          message.warning('message warning');
+          message.error('message error');` }}
+        </template>
+      </DocExampleBlock>
+    </section>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+section {
+  @apply w-full flex flex-col gap-4;
+}
+</style>
