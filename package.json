@@ -1,7 +1,7 @@
 {
   "name": "rayine-layer",
   "type": "module",
-  "version": "0.1.4-beta.2",
+  "version": "0.1.4-beta.3",
   "main": "./nuxt.config.ts",
   "scripts": {
     "dev": "nuxi dev .playground",
