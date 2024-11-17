@@ -37,7 +37,7 @@ const codeSlotContent = computed(() => {
 
     // remove the minimum indent from each line
     const stringContent = contentLines.map(line => line.slice(minIndent)).join('\n');
-    
+
     return stringContent;
   }
   return '';
@@ -72,9 +72,7 @@ defineProps({
 
     <template v-if="slots.code">
       <div class="p-4 overflow-auto">
-        <ClientOnly>
-          <Shiki class="text-sm" :lang="lang" :code="codeSlotContent" />
-        </ClientOnly>
+        <LazyShiki class="text-sm" :lang="lang" :code="codeSlotContent" />
       </div>
     </template>
   </div>
