@@ -72,7 +72,9 @@ defineProps({
 
     <template v-if="slots.code">
       <div class="p-4 overflow-auto">
-        <Shiki class="text-sm" :lang="lang" :code="codeSlotContent" />
+        <ClientOnly>
+          <Shiki class="text-sm" :lang="lang" :code="codeSlotContent" />
+        </ClientOnly>
       </div>
     </template>
   </div>
