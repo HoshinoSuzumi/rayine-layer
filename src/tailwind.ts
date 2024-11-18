@@ -88,29 +88,21 @@ export const installTailwind = async (
     twConfigPaths.push(...userTwConfigPath)
   }
 
-  let tailwindModule;
-  try {
-    tailwindModule = require("@nuxtjs/tailwindcss");
-    tailwindModule.default({
-      configPath: twConfigPaths,
-      ...twModuleConfig,
-    });
-  } catch (e) {
-    // If not installed, install the module
-    tailwindModule = installModule(
-      "@nuxtjs/tailwindcss",
-      defu(
-        {
-          exposeConfig: true,
-          config: {
-            darkMode: "class" as const,
-          },
-          configPath: twConfigPaths,
-        },
-        twModuleConfig
-      )
-    );
+  if (nuxt.options.modules.includes('@nuxtjs/tailwindcss')) {
+    return
   }
 
-  return tailwindModule;
+  installModule(
+    '@nuxtjs/tailwindcss',
+    defu(
+      {
+        exposeConfig: true,
+        config: {
+          darkMode: 'class' as const,
+        },
+        configPath: twConfigPaths,
+      },
+      twModuleConfig,
+    ),
+  )
 }
