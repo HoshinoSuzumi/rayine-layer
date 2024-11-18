@@ -50,22 +50,22 @@ export const installTailwind = (
           ],
         },
         transform: {
-            vue: (content) => {
-              return content.replaceAll(/(?:\\r\\n|\\r|\\n)/g, ' ')
-            }
-          },
-          extract: {
-            vue: (content) => {
-              return [
-                ...defaultExtractor(content),
-                ...customSafelistExtractor(${JSON.stringify(
+          vue: (content) => {
+            return content.replaceAll(/(?:\\r\\n|\\r|\\n)/g, ' ')
+          }
+        },
+        extract: {
+          vue: (content) => {
+            return [
+              ...defaultExtractor(content),
+              ...customSafelistExtractor(${JSON.stringify(
                   moduleOptions.prefix,
                 )}, content, ${JSON.stringify(
                   nuxt.options.appConfig.rayui.colors,
-                )}, ${JSON.stringify(moduleOptions.safelistColors)})
-              ]
-            }
+                )}, ${JSON.stringify(moduleOptions.safeColors)})
+            ]
           }
+        },
         safelist: generateSafelist(${JSON.stringify(
           moduleOptions.safeColors || [],
         )}, ${JSON.stringify(nuxt.options.appConfig.rayui.colors)}),
