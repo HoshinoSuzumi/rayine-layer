@@ -1,6 +1,6 @@
 {
   "name": "rayine-ui",
-  "version": "1.0.7-beta.1",
+  "version": "1.0.7-beta.2",
   "description": "RayineSoft UI Components",
   "repository": "HoshinoSuzumi/rayine-ui",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "prepack": "nuxt-module-build build",
     "dev": "nuxi dev docs",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare docs",
-    "build:docs" : "nuxi generate docs",
+    "build:docs": "nuxi generate docs",
     "play": "nuxi dev playground",
     "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
@@ -32,6 +32,8 @@
   "dependencies": {
     "@nuxt/kit": "^3.14.159",
     "@nuxtjs/tailwindcss": "^6.12.2",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.15",
     "defu": "^6.1.4",
     "pathe": "^1.1.2",
     "scule": "^1.3.0",
