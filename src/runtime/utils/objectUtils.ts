@@ -1,37 +1,38 @@
 export const omit = <T extends Record<string, any>, K extends keyof T>(
   object: T,
-  keysToOmit: K[] | any[]
+  keysToOmit: K[] | any[],
 ): Pick<T, Exclude<keyof T, K>> => {
-  const result = { ...object };
+  const result = { ...object }
 
   for (const key of keysToOmit) {
-    delete result[key];
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    delete result[key]
   }
 
-  return result;
-};
+  return result
+}
 
 export const getValueByPath = (
   obj: Record<string, any>,
   path: string | (string | number)[],
-  defaultValue?: any
+  defaultValue?: any,
 ): any => {
-  if (typeof path === "string") {
-    path = path.split(".").map((key) => {
-      const num = Number(key);
-      return Number.isNaN(num) ? key : num;
-    });
+  if (typeof path === 'string') {
+    path = path.split('.').map((key) => {
+      const num = Number(key)
+      return Number.isNaN(num) ? key : num
+    })
   }
 
-  let result = obj;
+  let result = obj
 
   for (const key of path) {
     if (result === undefined || result === null) {
-      return defaultValue;
+      return defaultValue
     }
 
-    result = result[key];
+    result = result[key]
   }
 
-  return result !== undefined ? result : defaultValue;
-};
+  return result !== undefined ? result : defaultValue
+}

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { MessageProviderApi, Message } from '../../types/message';
+import type { MessageProviderApi, Message } from '../../types/message'
 
 const providerApi = inject<MessageProviderApi>('ray-message-provider')
 
@@ -20,13 +20,28 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="message" :class="{
-    [message.type]: message.type
-  }">
-    <IconCircleSuccess v-if="message.type === 'success'" class="text-xl" />
-    <IconCircleWarning v-if="message.type === 'warning'" class="text-xl" />
-    <IconCircleError v-if="message.type === 'error'" class="text-xl" />
-    <IconCircleInfo v-if="message.type === 'info'" class="text-xl" />
+  <div
+    class="message"
+    :class="{
+      [message.type]: message.type,
+    }"
+  >
+    <IconCircleSuccess
+      v-if="message.type === 'success'"
+      class="text-xl"
+    />
+    <IconCircleWarning
+      v-if="message.type === 'warning'"
+      class="text-xl"
+    />
+    <IconCircleError
+      v-if="message.type === 'error'"
+      class="text-xl"
+    />
+    <IconCircleInfo
+      v-if="message.type === 'info'"
+      class="text-xl"
+    />
     <span>
       {{ message.content }}
     </span>

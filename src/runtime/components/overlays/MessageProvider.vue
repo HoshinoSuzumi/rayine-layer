@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import type { Message, MessageType } from '../../types/message';
+import { ref } from 'vue'
+import type { Message, MessageType } from '../../types/message'
+import { useNuxtApp } from '#app'
 
 const props = defineProps({
   max: {
@@ -51,12 +53,16 @@ nuxtApp.vueApp.provide('ray-message', api)
 </script>
 
 <template>
-  <slot></slot>
+  <slot />
   <teleport to="body">
     <div id="message-provider">
       <div class="message-wrapper">
         <TransitionGroup name="message">
-          <RayMessage v-for="(message, k) in messageList" :key="message.id" :message="message" />
+          <RayMessage
+            v-for="(message) in messageList"
+            :key="message.id"
+            :message="message"
+          />
         </TransitionGroup>
       </div>
     </div>

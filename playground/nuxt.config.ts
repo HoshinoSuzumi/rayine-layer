@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
-  compatibilityDate: "2024-11-18",
+  modules: ['../src/module'],
   devtools: { enabled: true },
-  modules: ["../src/module"],
+  compatibilityDate: '2024-11-18',
   rayui: {},
-});
+})

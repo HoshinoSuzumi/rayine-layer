@@ -1,28 +1,28 @@
 <script lang="ts" setup>
-import { twJoin, twMerge } from 'tailwind-merge';
+import { twJoin, twMerge } from 'tailwind-merge'
+import type { PropType } from 'vue'
 import { button } from '../../ui.config'
-import type { DeepPartial, Strategy } from '../../types/utils';
-import type { PropType } from 'vue';
-import type { ButtonColor, ButtonSize, ButtonVariant } from '../../types/button';
+import type { DeepPartial, Strategy } from '../../types/utils'
+import type { ButtonColor, ButtonSize, ButtonVariant } from '../../types/button'
 
-const config = button;
+const config = button
 
 const props = defineProps({
   class: {
     type: String,
-    default: ''
+    default: '',
   },
   padded: {
     type: Boolean,
-    default: true
+    default: true,
   },
   square: {
     type: Boolean,
-    default: false
+    default: false,
   },
   block: {
     type: Boolean,
-    default: false
+    default: false,
   },
   size: {
     type: String as PropType<ButtonSize>,
@@ -34,12 +34,12 @@ const props = defineProps({
   },
   variant: {
     type: String as PropType<ButtonVariant>,
-    default: () => button.default.variant
+    default: () => button.default.variant,
   },
   ui: {
     type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
 })
 
 const { ui, attrs } = useUI('button', toRef(props, 'ui'), config)
@@ -60,8 +60,11 @@ const buttonClass = computed(() => {
 </script>
 
 <template>
-  <button :class="buttonClass" v-bind="{ ...attrs }">
-    <slot></slot>
+  <button
+    :class="buttonClass"
+    v-bind="{ ...attrs }"
+  >
+    <slot />
   </button>
 </template>
 

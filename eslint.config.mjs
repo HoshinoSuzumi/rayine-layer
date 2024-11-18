@@ -10,11 +10,19 @@ export default createConfigForNuxt({
     stylistic: true,
   },
   dirs: {
-    src: [
-      './playground',
-    ],
+    src: ['./playground'],
   },
+}).overrideRules({
+  '@typescript-eslint/no-unused-expressions': [
+    'error',
+    { allowShortCircuit: true },
+  ],
+  'vue/multi-word-component-names': 'off',
+  'vue/max-attributes-per-line': ['error', { singleline: 5 }],
+  '@typescript-eslint/ban-types': 'off',
+  '@typescript-eslint/ban-ts-comment': 'off',
+  '@typescript-eslint/no-unsafe-function-type': 'off',
+  '@typescript-eslint/no-empty-object-type': 'off',
+  '@typescript-eslint/no-explicit-any': 'off',
+  '@typescript-eslint/no-unused-vars': 'off',
 })
-  .append(
-    // your custom flat config here...
-  )
