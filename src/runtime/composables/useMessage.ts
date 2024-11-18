@@ -1,3 +1,4 @@
+import { inject } from 'vue'
 import type { MessageApi } from '../types/message'
 
 export const useMessage = () => {
