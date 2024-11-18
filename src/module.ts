@@ -56,7 +56,7 @@ export default defineNuxtModule<ModuleOptions>({
   async setup(_options, _nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
-    const runtimePath = resolve("runtime");
+    const runtimePath = resolve("./runtime");
     _nuxt.options.build.transpile.push(runtimePath);
     _nuxt.options.alias["#rayui"] = runtimePath;
 

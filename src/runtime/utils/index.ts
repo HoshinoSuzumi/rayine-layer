@@ -26,3 +26,5 @@ export const mergeUiConfig = <T>(strategy: Strategy, ...configs: any): T => {
   }
   return defu({}, ...configs) as T;
 };
+
+export * from './objectUtils'
