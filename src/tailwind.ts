@@ -1,10 +1,10 @@
-import { useNuxt, createResolver, addTemplate, installModule } from '@nuxt/kit'
+import { useNuxt, createResolver, addTemplate, installModule, tryResolveModule } from '@nuxt/kit'
 import type { ModuleOptions } from '@nuxt/schema'
 import defu from 'defu'
 import { join } from 'pathe'
 import { setColors } from './runtime/utils/colors'
 
-export const installTailwind = (
+export const installTailwind = async (
   moduleOptions: ModuleOptions,
   nuxt = useNuxt(),
   resolve = createResolver(import.meta.url).resolve,
@@ -88,17 +88,29 @@ export const installTailwind = (
     twConfigPaths.push(...userTwConfigPath)
   }
 
-  return installModule(
-    '@nuxtjs/tailwindcss',
-    defu(
-      {
-        exposeConfig: true,
-        config: {
-          darkMode: 'class' as const,
+  let tailwindModule;
+  try {
+    tailwindModule = require("@nuxtjs/tailwindcss");
+    tailwindModule.default({
+      configPath: twConfigPaths,
+      ...twModuleConfig,
+    });
+  } catch (e) {
+    // If not installed, install the module
+    tailwindModule = installModule(
+      "@nuxtjs/tailwindcss",
+      defu(
+        {
+          exposeConfig: true,
+          config: {
+            darkMode: "class" as const,
+          },
+          configPath: twConfigPaths,
         },
-        configPath: twConfigPaths,
-      },
-      twModuleConfig,
-    ),
-  )
+        twModuleConfig
+      )
+    );
+  }
+
+  return tailwindModule;
 }
