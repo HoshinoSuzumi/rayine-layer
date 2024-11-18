@@ -59,10 +59,10 @@ export const installTailwind = (
             return [
               ...defaultExtractor(content),
               ...customSafelistExtractor(${JSON.stringify(
-                  moduleOptions.prefix,
-                )}, content, ${JSON.stringify(
-                  nuxt.options.appConfig.rayui.colors,
-                )}, ${JSON.stringify(moduleOptions.safeColors)})
+                moduleOptions.prefix,
+              )}, content, ${JSON.stringify(
+                nuxt.options.appConfig.rayui.colors,
+              )}, ${JSON.stringify(moduleOptions.safeColors)})
             ]
           }
         },
