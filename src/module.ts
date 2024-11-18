@@ -1,14 +1,23 @@
-import { defineNuxtModule, addPlugin, createResolver } from "@nuxt/kit";
+import {
+  defineNuxtModule,
+  createResolver,
+  addPlugin,
+  addComponentsDir,
+  addImportsDir,
+} from "@nuxt/kit";
+import { name, version } from "../package.json";
+import { installTailwind } from "./tailwind";
 import type { config } from "process";
 import type { Strategy, DeepPartial } from "./runtime/types/utils";
+import { createTemplates } from "./template";
 
-export type RayUI = {
+type RayUI = {
   primary?: string;
   gray?: string;
   strategy?: Strategy;
   colors?: string[];
   [key: string]: any;
-} & DeepPartial<typeof config>;
+} & DeepPartial<typeof config, string | number | boolean>;
 
 declare module "@nuxt/schema" {
   interface AppConfigInput {
@@ -16,20 +25,62 @@ declare module "@nuxt/schema" {
   }
 }
 
-// Module options TypeScript interface definition
-export interface ModuleOptions {}
+export interface ModuleOptions {
+  prefix?: string;
+  safeColors?: string[];
+}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "rayine/ui",
+    name,
+    version,
     configKey: "rayui",
+    compatibility: {
+      nuxt: ">=3.0.0",
+    },
   },
-  // Default configuration options of the Nuxt module
-  defaults: {},
-  setup(_options, _nuxt) {
-    const resolver = createResolver(import.meta.url);
+  defaults: {
+    prefix: "Ray",
+    safeColors: ["primary"],
+  },
+  async setup(_options, _nuxt) {
+    const { resolve } = createResolver(import.meta.url);
 
-    // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
-    addPlugin(resolver.resolve("./runtime/plugin"));
+    const runtimePath = resolve("runtime");
+    _nuxt.options.build.transpile.push(runtimePath);
+    _nuxt.options.alias["#rayui"] = runtimePath;
+
+    createTemplates(_nuxt);
+
+    // Modules
+    installTailwind(_options, _nuxt, resolve);
+
+    // Plugins
+    addPlugin({
+      src: resolve(runtimePath, "plugins", "colors"),
+    });
+
+    // Components
+    addComponentsDir({
+      path: resolve(runtimePath, "components", "elements"),
+      prefix: _options.prefix,
+      global: false,
+      watch: false,
+    });
+    addComponentsDir({
+      path: resolve(runtimePath, "components", "forms"),
+      prefix: _options.prefix,
+      global: false,
+      watch: false,
+    });
+    addComponentsDir({
+      path: resolve(runtimePath, "components", "overlays"),
+      prefix: _options.prefix,
+      global: false,
+      watch: false,
+    });
+
+    // Composables
+    addImportsDir(resolve(runtimePath, "composables"));
   },
 });

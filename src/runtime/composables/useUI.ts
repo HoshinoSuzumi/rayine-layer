@@ -1,4 +1,8 @@
+import { useAppConfig } from "#app";
+import { type Ref, useAttrs, computed, toValue } from "vue";
 import type { DeepPartial, Strategy } from "../types/utils";
+import { mergeUiConfig } from "../utils";
+import { omit, getValueByPath } from "../utils/objectUtils";
 
 export const useUI = <T>(
   key: string,

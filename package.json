@@ -1,8 +1,8 @@
 {
-  "name": "my-module",
+  "name": "rayine-ui",
   "version": "1.0.0",
-  "description": "My new Nuxt module",
-  "repository": "your-org/my-module",
+  "description": "RayineSoft UI Components",
+  "repository": "HoshinoSuzumi/rayine-ui",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -29,7 +29,11 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.14.159"
+    "@nuxt/kit": "^3.14.159",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "defu": "^6.1.4",
+    "pathe": "^1.1.2",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.0",

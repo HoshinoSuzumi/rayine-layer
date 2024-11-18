@@ -1,6 +1,7 @@
 import { computed } from "vue";
 import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from "#imports";
-import colors from "tailwindcss/colors";
+import colors from "#tailwind-config/theme/colors";
+import { getValueByPath } from "../utils/objectUtils";
 
 const rgbHexPattern = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
 

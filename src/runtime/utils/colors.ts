@@ -1,5 +1,5 @@
 import type { Config as TwConfig } from "tailwindcss";
-import defaultColors from "tailwindcss/colors";
+import defaultColors from "tailwindcss/colors.js";
 import type { SafelistConfig } from "tailwindcss/types/config";
 
 // @ts-ignore
