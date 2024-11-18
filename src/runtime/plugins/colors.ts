@@ -1,5 +1,6 @@
 import { computed } from "vue";
-import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from "#imports";
+import { useAppConfig, useNuxtApp, useHead } from "#imports";
+import { defineNuxtPlugin } from "nuxt/app";
 import colors from "#tailwind-config/theme/colors";
 import { getValueByPath } from "../utils/objectUtils";
 
