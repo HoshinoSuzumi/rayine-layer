@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { inject, ref, onMounted } from 'vue';
 import type { MessageProviderApi, Message } from '../../types/message'
 
 const providerApi = inject<MessageProviderApi>('ray-message-provider')

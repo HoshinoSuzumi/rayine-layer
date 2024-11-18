@@ -4,7 +4,7 @@ import { mergeUiConfig } from '../utils'
 import { omit, getValueByPath } from '../utils/objectUtils'
 import { useAppConfig } from '#app'
 
-export const useUI = <T>(
+export const useRayUI = <T>(
   key: string,
   ui?: Ref<(DeepPartial<T> & { strategy?: Strategy }) | undefined>,
   config?: T | Ref<T>,

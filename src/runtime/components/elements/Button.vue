@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { twJoin, twMerge } from 'tailwind-merge'
-import type { PropType } from 'vue'
+import { computed, toRef, type PropType } from 'vue'
 import { button } from '../../ui.config'
 import type { DeepPartial, Strategy } from '../../types/utils'
 import type { ButtonColor, ButtonSize, ButtonVariant } from '../../types/button'
+import { useRayUI } from '#build/imports'
 
 const config = button
 
@@ -42,7 +43,7 @@ const props = defineProps({
   },
 })
 
-const { ui, attrs } = useUI('button', toRef(props, 'ui'), config)
+const { ui, attrs } = useRayUI('button', toRef(props, 'ui'), config)
 
 const buttonClass = computed(() => {
   // @ts-ignore
