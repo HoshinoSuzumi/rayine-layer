@@ -23,6 +23,9 @@ importers:
       tailwind-merge:
         specifier: ^2.5.4
         version: 2.5.4
+      tailwindcss:
+        specifier: ^3.4.15
+        version: 3.4.15
     devDependencies:
       '@nuxt/devtools':
         specifier: ^1.6.0
