@@ -10,7 +10,7 @@ export const createTemplates = (nuxt = useNuxt()) => {
   const typesTemplate = addTemplate({
     filename: "ray.colors.d.ts",
     getContents: () =>
-      `declare module '#ui-colors' { const defaultExport: ${JSON.stringify(
+      `declare module '#ray-colors' { const defaultExport: ${JSON.stringify(
         nuxt.options.appConfig.rayui.colors
       )}; export default defaultExport; }`,
     write: true,

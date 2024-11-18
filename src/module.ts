@@ -10,6 +10,16 @@ import { installTailwind } from "./tailwind";
 import type { config } from "process";
 import type { Strategy, DeepPartial } from "./runtime/types/utils";
 import { createTemplates } from "./template";
+import { createRequire } from "node:module";
+
+const _require = createRequire(import.meta.url);
+const defaultColors = _require("tailwindcss/colors.js");
+
+delete defaultColors.lightBlue;
+delete defaultColors.warmGray;
+delete defaultColors.trueGray;
+delete defaultColors.coolGray;
+delete defaultColors.blueGray;
 
 type RayUI = {
   primary?: string;

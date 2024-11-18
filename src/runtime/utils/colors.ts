@@ -1,17 +1,5 @@
 import type { Config as TwConfig } from "tailwindcss";
 import defaultColors from "tailwindcss/colors.js";
-import type { SafelistConfig } from "tailwindcss/types/config";
-
-// @ts-ignore
-delete defaultColors.lightBlue;
-// @ts-ignore
-delete defaultColors.warmGray;
-// @ts-ignore
-delete defaultColors.trueGray;
-// @ts-ignore
-delete defaultColors.coolGray;
-// @ts-ignore
-delete defaultColors.blueGray;
 
 const colorsToRegex = (colors: string[]): string => colors.join("|");
 
@@ -136,32 +124,12 @@ const safelistForComponent: Record<
   ],
 };
 
-export const generateSafelist = (
-  colors: string[],
-  globalColors: string[]
-): string[] => {
-  const safelist = Object.keys(safelistForComponent)
-    .flatMap((component) =>
-      safelistForComponent[component](colorsToRegex(colors))
-    )
-    .filter(
-      (item): item is Exclude<SafelistConfig, string> => item !== undefined
-    );
+export const generateSafelist = (colors: string[], globalColors: string[]) => {
+  const safelist = Object.keys(safelistForComponent).flatMap((component) =>
+    safelistForComponent[component](colorsToRegex(colors))
+  );
 
-  const extractColorsFromPattern = (pattern: RegExp): string[] => {
-    const matches = pattern.source.match(/\(([^)]+)\)/);
-    if (!matches) return [];
-    return matches[1].split("|").map((color) =>
-      pattern.source.replace(matches[0], color).replace(/[\^\$]/g, "")
-    );
-  };
-
-  return safelist.flatMap((item) => {
-    const replacedStrings = extractColorsFromPattern(item.pattern);
-    return replacedStrings.concat(
-      item.variants?.flatMap((variant) =>
-        replacedStrings.map((str) => `${variant}:${str}`)
-      ) || []
-    );
-  });
+  return [
+    ...safelist
+  ]
 };
