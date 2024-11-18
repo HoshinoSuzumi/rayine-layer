@@ -31,9 +31,12 @@ export const installTailwind = (
     filename: 'ray-tailwind.config.cjs',
     write: true,
     getContents: ({ nuxt }) => `
-      const { generateSafelist } = require(${JSON.stringify(
+      const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
+      const { customSafelistExtractor, generateSafelist } = require(${JSON.stringify(
         resolve(runtimePath, 'utils', 'colors'),
       )})
+
+      const defaultExtractor = createDefaultExtractor({ tailwindConfig: { separator: ':' } })
 
       module.exports = {
         content: {
@@ -46,6 +49,23 @@ export const installTailwind = (
             )}
           ],
         },
+        transform: {
+            vue: (content) => {
+              return content.replaceAll(/(?:\\r\\n|\\r|\\n)/g, ' ')
+            }
+          },
+          extract: {
+            vue: (content) => {
+              return [
+                ...defaultExtractor(content),
+                ...customSafelistExtractor(${JSON.stringify(
+                  moduleOptions.prefix,
+                )}, content, ${JSON.stringify(
+                  nuxt.options.appConfig.rayui.colors,
+                )}, ${JSON.stringify(moduleOptions.safelistColors)})
+              ]
+            }
+          }
         safelist: generateSafelist(${JSON.stringify(
           moduleOptions.safeColors || [],
         )}, ${JSON.stringify(nuxt.options.appConfig.rayui.colors)}),

@@ -25,4 +25,5 @@ export default createConfigForNuxt({
   '@typescript-eslint/no-empty-object-type': 'off',
   '@typescript-eslint/no-explicit-any': 'off',
   '@typescript-eslint/no-unused-vars': 'off',
+  'regexp/no-super-linear-backtracking': 'off',
 })

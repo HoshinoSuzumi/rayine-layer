@@ -1,5 +1,6 @@
 import type { Config as TwConfig } from 'tailwindcss'
 import defaultColors from 'tailwindcss/colors.js'
+import { camelCase, upperFirst } from 'scule'
 import { omit } from './objectUtils'
 
 const colorsToRegex = (colors: string[]): string => colors.join('|')
@@ -138,4 +139,77 @@ export const generateSafelist = (colors: string[], globalColors: string[]) => {
   )
 
   return [...safelist]
+}
+
+type SafelistFn = Exclude<
+  NonNullable<Extract<TwConfig['content'], { extract?: unknown }>['extract']>,
+  Record<string, unknown>
+>
+export const customSafelistExtractor = (
+  prefix: string,
+  content: string,
+  colors: string[],
+  safelistColors: string[],
+): ReturnType<SafelistFn> => {
+  const classes: string[] = []
+
+  const regex
+    = /<([A-Za-z][A-Za-z0-9]*(?:-[A-Za-z][A-Za-z0-9]*)*)\s+(?![^>]*:color\b)[^>]*\bcolor=["']([^"']+)["'][^>]*>/g
+
+  const matches = content.matchAll(regex)
+
+  const components = Object.keys(safelistForComponent).map(
+    component =>
+      `${prefix}${component.charAt(0).toUpperCase() + component.slice(1)}`,
+  )
+
+  for (const match of matches) {
+    const [, component, color] = match
+
+    const camelComponent = upperFirst(camelCase(component))
+
+    if (!colors.includes(color) || safelistColors.includes(color)) {
+      continue
+    }
+
+    let name = camelComponent as string
+
+    if (!components.includes(name)) {
+      continue
+    }
+
+    name = name.replace(prefix, '').toLowerCase()
+
+    const matchClasses = safelistForComponent[name](color)?.flatMap((group) => {
+      return typeof group === 'string'
+        ? ''
+        : ['', ...(group.variants || [])].flatMap((variant) => {
+            const matches = group.pattern.source.match(/\(([^)]+)\)/g)
+
+            return (
+              matches
+                ?.map((match) => {
+                  const colorOptions = match
+                    .substring(1, match.length - 1)
+                    .split('|')
+                  return colorOptions.map((color) => {
+                    const classesExtracted = group.pattern.source
+                      .replace(match, color)
+                      .replace('^', '')
+                      .replace('$', '')
+                    if (variant) {
+                      return `${variant}:${classesExtracted}`
+                    }
+                    return classesExtracted
+                  })
+                })
+                .flat() || []
+            )
+          })
+    })
+
+    classes.push(...(matchClasses as string[]))
+  }
+
+  return classes
 }
