@@ -37,6 +37,7 @@ declare module '@nuxt/schema' {
 
 export interface ModuleOptions {
   prefix?: string
+  globalComponents?: boolean
   safeColors?: string[]
 }
 
@@ -51,6 +52,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     prefix: 'Ray',
+    globalComponents: false,
     safeColors: ['primary'],
   },
   async setup(_options, _nuxt) {
@@ -74,25 +76,25 @@ export default defineNuxtModule<ModuleOptions>({
     addComponentsDir({
       path: resolve(runtimePath, 'components', 'elements'),
       prefix: _options.prefix,
-      global: false,
+      global: _options.globalComponents,
       watch: false,
     })
     addComponentsDir({
       path: resolve(runtimePath, 'components', 'forms'),
       prefix: _options.prefix,
-      global: false,
+      global: _options.globalComponents,
       watch: false,
     })
     addComponentsDir({
       path: resolve(runtimePath, "components", "overlays"),
       prefix: _options.prefix,
-      global: false,
+      global: _options.globalComponents,
       watch: false,
     })
     addComponentsDir({
       path: resolve(runtimePath, "components", "icons"),
       prefix: 'Icon',
-      global: false,
+      global: _options.globalComponents,
       watch: false,
     })
 
