@@ -4,7 +4,7 @@ import defu from 'defu'
 import { join } from 'pathe'
 import { setColors } from './runtime/utils/colors'
 
-export const installTailwind = async (
+export const installTailwind = (
   moduleOptions: ModuleOptions,
   nuxt = useNuxt(),
   resolve = createResolver(import.meta.url).resolve,
@@ -88,11 +88,7 @@ export const installTailwind = async (
     twConfigPaths.push(...userTwConfigPath)
   }
 
-  if (nuxt.options.modules.includes('@nuxtjs/tailwindcss')) {
-    return
-  }
-
-  installModule(
+  return installModule(
     '@nuxtjs/tailwindcss',
     defu(
       {

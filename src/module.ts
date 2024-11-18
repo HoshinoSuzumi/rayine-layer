@@ -63,7 +63,7 @@ export default defineNuxtModule<ModuleOptions>({
     createTemplates(_nuxt)
 
     // Modules
-    await installTailwind(_options, _nuxt, resolve)
+    installTailwind(_options, _nuxt, resolve)
 
     // Plugins
     addPlugin({
