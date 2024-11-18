@@ -84,8 +84,14 @@ export default defineNuxtModule<ModuleOptions>({
       watch: false,
     })
     addComponentsDir({
-      path: resolve(runtimePath, 'components', 'overlays'),
+      path: resolve(runtimePath, "components", "overlays"),
       prefix: _options.prefix,
+      global: false,
+      watch: false,
+    })
+    addComponentsDir({
+      path: resolve(runtimePath, "components", "icons"),
+      prefix: 'Icon',
       global: false,
       watch: false,
     })
