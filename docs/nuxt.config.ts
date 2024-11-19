@@ -4,15 +4,15 @@ import defaultTheme from "tailwindcss/defaultTheme";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
-  modules: ["@nuxt/content", "@nuxt/fonts", module],
+  modules: ["@nuxt/content", "@nuxt/fonts", "@nuxtjs/color-mode", module],
   devtools: { enabled: true },
   rayui: {
+    // @ts-ignore
     globalComponents: true,
     safeColors: ["amber", "emerald", "red", "sky", "violet", "cyan"],
   },
   tailwindcss: {
     config: {
-      darkMode: "media",
       theme: {
         extend: {
           fontFamily: {
@@ -21,6 +21,10 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  colorMode: {
+    preference: "system",
+    classSuffix: "",
   },
   components: [
     {
@@ -31,6 +35,11 @@ export default defineNuxtConfig({
   content: {
     highlight: {
       langs: ["postcss", "mdc", "html", "vue", "ts", "js"],
+    },
+  },
+  mdc: {
+    highlight: {
+      themes: ["material-theme-lighter", "material-theme", "light-plus", "dark-plus"],
     },
   },
   typescript: {

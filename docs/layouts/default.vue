@@ -18,11 +18,13 @@ body {
   @apply bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100;
 }
 
-.shiki,
+/* .shiki,
 .shiki span {
   background-color: rgba(0, 0, 0, 0) !important;
-}
+} */
 
+
+/*
 @media (prefers-color-scheme: dark) {
 
   .shiki,
@@ -34,5 +36,5 @@ body {
     font-weight: var(--shiki-dark-font-weight) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;
   }
-}
+} */
 </style>

@@ -1,25 +1,31 @@
-# Button
-
-Buttons are used to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+---
+description: Create a button component with different variants and colors
+---
 
 ## Usage
 
-```html
-<RayButton>Click me</RayButton>
-```
+Default button style
 
----
-
-::DocExampleBlock
-test
-
-#code
-console.log('Hello Rayine')
+::ComponentPreview
+Button
 ::
 
-::RayButton
+### Variants
+
+::ComponentPreview
 ---
-color: red
+props:
+  variant: soft
 ---
-Hello Rayine
+Button
+::
+
+### Colors
+
+::ComponentPreview
+---
+props:
+  color: violet
+---
+Button
 ::
