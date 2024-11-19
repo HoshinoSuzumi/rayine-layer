@@ -4,6 +4,8 @@ import FileTypeTypescript from "./icon/VscodeIconsFileTypeTypescriptOfficial.vue
 import FileTypeJavascript from "./icon/VscodeIconsFileTypeJsOfficial.vue"
 import TablerTerminal from "./icon/TablerTerminal.vue";
 
+const hightlighter = useShikiHighlighter();
+
 const slots = defineSlots<{
   default?: () => VNode[];
   code?: () => VNode[];
@@ -43,7 +45,7 @@ const codeSlotContent = computed(() => {
   return '';
 })
 
-defineProps({
+const props = defineProps({
   filename: {
     type: String,
     default: '',
@@ -52,6 +54,35 @@ defineProps({
     type: String as PropType<keyof typeof IconComponents>,
     default: '',
   },
+  code: {
+    type: String,
+    default: '',
+  }
+})
+
+const { data: ast } = await useAsyncData(`${'name'}-ast-${JSON.stringify({ slots: props.slots, code: props.code })}`, async () => {
+  let formatted = ''
+  try {
+    // @ts-ignore
+    formatted = await $prettier.format(code.value, {
+      trailingComma: 'none',
+      semi: false,
+      singleQuote: true
+    })
+  } catch {
+    formatted = props.code
+  }
+
+  return parseMarkdown(formatted, {
+    highlight: {
+      highlighter,
+      theme: {
+        light: 'material-theme-lighter',
+        default: 'material-theme',
+        dark: 'material-theme-palenight'
+      }
+    }
+  })
 })
 </script>
 
@@ -72,7 +103,8 @@ defineProps({
 
     <template v-if="slots.code">
       <div class="p-4 overflow-auto">
-        <LazyShiki class="text-sm" :lang="lang" :code="codeSlotContent" />
+        <!-- <LazyShiki class="text-sm" :lang="lang" :code="codeSlotContent" /> -->
+         <ContentRenderer :value="ast" v-if="ast"/>
       </div>
     </template>
   </div>
