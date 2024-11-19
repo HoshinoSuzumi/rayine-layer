@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import FileTypeVue from "./icon/VscodeIconsFileTypeVue.vue"
-import FileTypeTypescript from "./icon/VscodeIconsFileTypeTypescriptOfficial.vue"
-import FileTypeJavascript from "./icon/VscodeIconsFileTypeJsOfficial.vue"
-import TablerTerminal from "./icon/TablerTerminal.vue";
+import FileTypeVue from "../icon/VscodeIconsFileTypeVue.vue"
+import FileTypeTypescript from "../icon/VscodeIconsFileTypeTypescriptOfficial.vue"
+import FileTypeJavascript from "../icon/VscodeIconsFileTypeJsOfficial.vue"
+import TablerTerminal from "../icon/TablerTerminal.vue";
 import { camelCase, kebabCase, upperFirst } from "scule";
 
 const route = useRoute();
-const highlighter = useShikiHighlighter();
 
 const slots = defineSlots<{
   default?: () => VNode[];
@@ -61,7 +60,7 @@ const code = computed(() => {
   return code;
 })
 
-const { data: codeRender } = await useAsyncData(`${componentName}-renderer-${JSON.stringify({ slots: slots, code: code.value })}`, async () => {
+const { data: codeRender, error: codeRenderError } = await useAsyncData(`${componentName}-renderer-${JSON.stringify({ slots: slots, code: code.value })}`, async () => {
   let formatted = ''
   try {
     // @ts-ignore
@@ -75,13 +74,6 @@ const { data: codeRender } = await useAsyncData(`${componentName}-renderer-${JSO
   }
 
   return parseMarkdown(formatted, {
-    highlight: {
-      highlighter,
-      theme: {
-        light: 'light-plus',
-        dark: 'dark-plus'
-      }
-    }
   })
 }, {
   watch: [code]
@@ -103,9 +95,10 @@ const { data: codeRender } = await useAsyncData(`${componentName}-renderer-${JSO
       </component>
     </div>
 
-    <template v-if="codeRender">
+    <template v-if="codeRender || codeRenderError">
       <div class="overflow-auto">
-        <ContentRenderer :value="codeRender" v-if="codeRender" class="p-4 bg-neutral-50 dark:bg-neutral-800/50" />
+        <ContentRenderer v-if="codeRender" :value="codeRender" class="p-4 bg-neutral-50 dark:bg-neutral-800/50" />
+        <pre class="p-4" v-if="codeRenderError">{{ codeRenderError }}</pre>
       </div>
     </template>
   </div>

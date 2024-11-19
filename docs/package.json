@@ -15,6 +15,7 @@
     "nuxt": "^3.14.159",
     "nuxt-shiki": "^0.3.0",
     "rayine-ui": "workspace:rayine-ui",
+    "ufo": "^1.5.4",
     "vue": "latest",
     "vue-router": "latest"
   },

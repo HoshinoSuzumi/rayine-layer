@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     globalComponents: true,
     safeColors: ["amber", "emerald", "red", "sky", "violet", "cyan"],
   },
+  routeRules: {
+    "/components": { redirect: "/components/button" },
+  },
   tailwindcss: {
     config: {
       theme: {
@@ -26,12 +29,6 @@ export default defineNuxtConfig({
     preference: "system",
     classSuffix: "",
   },
-  components: [
-    {
-      path: "~/components",
-      global: true,
-    },
-  ],
   content: {
     highlight: {
       langs: ["postcss", "mdc", "html", "vue", "ts", "js"],
@@ -39,7 +36,11 @@ export default defineNuxtConfig({
   },
   mdc: {
     highlight: {
-      themes: ["material-theme-lighter", "material-theme", "light-plus", "dark-plus"],
+      theme: {
+        light: "material-theme-lighter",
+        dark: "material-theme",
+      },
+      themes: ["material-theme-lighter", "material-theme"],
     },
   },
   typescript: {

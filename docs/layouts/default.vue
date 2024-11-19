@@ -5,7 +5,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto px-4">
+  <div class="max-w-6xl mx-auto px-4">
     <TitleBar />
     <main class="pt-4">
       <slot></slot>
