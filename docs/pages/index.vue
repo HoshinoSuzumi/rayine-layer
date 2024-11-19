@@ -5,11 +5,18 @@ const router = useRouter()
 <template>
   <div class="flex flex-col gap-8">
     <div
-      class="py-20 flex flex-col justify-center items-center rounded-xl border border-neutral-200 dark:border-neutral-800 pattern">
+      class="py-20 flex flex-col justify-center items-center rounded-xl border border-neutral-200 dark:border-neutral-800 pattern"
+    >
       <div class="text-xl text-neutral-600 dark:text-neutral-300 font-bold">
-        <h2 class="text-xl">RayineUI <span class="font-medium">is multi-purpose</span></h2>
-        <h1 class="text-4xl text-primary">Customizable</h1>
-        <h1 class="text-2xl text-primary font-medium pl-0.5">UI Library</h1>
+        <h2 class="text-xl">
+          RayineUI <span class="font-medium">is multi-purpose</span>
+        </h2>
+        <h1 class="text-4xl text-primary">
+          Customizable
+        </h1>
+        <h1 class="text-2xl text-primary font-medium pl-0.5">
+          UI Library
+        </h1>
       </div>
     </div>
     <div class="flex justify-center items-center gap-4">

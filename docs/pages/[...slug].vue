@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { withoutTrailingSlash } from 'ufo';
+import { withoutTrailingSlash } from 'ufo'
 
 const route = useRoute()
 
@@ -10,7 +10,7 @@ const { data: page } = await useAsyncData(route.path, () => queryContent(route.p
 
 if (!page.value) {
   throw createError({
-    statusCode: 404, statusMessage: 'Page not found', fatal: true
+    statusCode: 404, statusMessage: 'Page not found', fatal: true,
   })
 }
 
@@ -21,8 +21,8 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
     .where({
       _extension: 'md',
       navigation: {
-        $ne: false
-      }
+        $ne: false,
+      },
     })
     .only(['title', 'description', '_path'])
     .findSurround(withoutTrailingSlash(route.path))
@@ -41,8 +41,11 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
               </NuxtLink>
               <ul v-if="link.children" class="pl-4 pt-2 space-y-1">
                 <li v-for="child in link.children" :key="child._path">
-                  <NuxtLink :to="child._path" class="text-sm text-neutral-500 dark:text-neutral-400"
-                    active-class="text-primary font-medium">
+                  <NuxtLink
+                    :to="child._path"
+                    class="text-sm text-neutral-500 dark:text-neutral-400"
+                    active-class="text-primary font-medium"
+                  >
                     {{ child.title }}
                   </NuxtLink>
                 </li>
@@ -55,22 +58,27 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 
     <div class="col-span-12" :class="[hasToc ? 'md:col-span-8' : 'md:col-span-10']">
       <div>
-        <h1 class="text-3xl text-primary font-medium">{{ page?.title || 'untitled' }}</h1>
-        <p v-if="page?.description" class="text-lg text-neutral-500 mt-2">{{ page.description }}</p>
+        <h1 class="text-3xl text-primary font-medium">
+          {{ page?.title || 'untitled' }}
+        </h1>
+        <p v-if="page?.description" class="text-lg text-neutral-500 mt-2">
+          {{ page.description }}
+        </p>
       </div>
-      <hr class="my-4 dark:border-neutral-700" />
+      <hr class="my-4 dark:border-neutral-700">
       <div class="doc-body">
         <ContentRenderer v-if="page?.body" :value="page" />
       </div>
 
       <div
-        class="w-full flex justify-between gap-4 mt-12 pt-12 border-t border-t-neutral-200 dark:border-t-neutral-700">
+        class="w-full flex justify-between gap-4 mt-12 pt-12 border-t border-t-neutral-200 dark:border-t-neutral-700"
+      >
         <div class="flex-1">
           <NuxtLink v-if="surround?.[0]" :to="surround[0]._path" class="surround-btn">
             <div>
               <span class="tip">Previous</span>
               <span class="title">{{ surround[0].title }}</span>
-              <span class="description" v-if="surround[0].description">{{ surround[0].description }}</span>
+              <span v-if="surround[0].description" class="description">{{ surround[0].description }}</span>
             </div>
           </NuxtLink>
         </div>
@@ -79,7 +87,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
             <div>
               <span class="tip">Next</span>
               <span class="title">{{ surround[1].title }}</span>
-              <span class="description" v-if="surround[1].description">{{ surround[1].description }}</span>
+              <span v-if="surround[1].description" class="description">{{ surround[1].description }}</span>
             </div>
           </NuxtLink>
         </div>
@@ -88,7 +96,8 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 
     <div v-if="hasToc" class="hidden" :class="{ 'col-span-2 md:block': hasToc }">
       <div
-        class="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg px-4 py-3 overflow-hidden overflow-y-auto sticky top-[calc(64px+16px)]">
+        class="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg px-4 py-3 overflow-hidden overflow-y-auto sticky top-[calc(64px+16px)]"
+      >
         <span class="text-xs text-neutral-600 dark:text-neutral-300 font-medium inline-block mb-2">
           Table of contents
         </span>

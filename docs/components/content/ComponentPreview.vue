@@ -1,15 +1,11 @@
 <script lang="ts" setup>
-import FileTypeVue from "../icon/VscodeIconsFileTypeVue.vue"
-import FileTypeTypescript from "../icon/VscodeIconsFileTypeTypescriptOfficial.vue"
-import FileTypeJavascript from "../icon/VscodeIconsFileTypeJsOfficial.vue"
-import TablerTerminal from "../icon/TablerTerminal.vue";
-import { camelCase, kebabCase, upperFirst } from "scule";
+import { camelCase, kebabCase, upperFirst } from 'scule'
+import FileTypeVue from '../icon/VscodeIconsFileTypeVue.vue'
+import FileTypeTypescript from '../icon/VscodeIconsFileTypeTypescriptOfficial.vue'
+import FileTypeJavascript from '../icon/VscodeIconsFileTypeJsOfficial.vue'
+import TablerTerminal from '../icon/TablerTerminal.vue'
 
-const route = useRoute();
-
-const slots = defineSlots<{
-  default?: () => VNode[];
-}>();
+const route = useRoute()
 
 const IconComponents = {
   'vue': FileTypeVue,
@@ -57,26 +53,27 @@ const code = computed(() => {
   code += `/>\n</template>
 \`\`\`
   `
-  return code;
+  return code
 })
 
-const { data: codeRender, error: codeRenderError } = await useAsyncData(`${componentName}-renderer-${JSON.stringify({ slots: slots, code: code.value })}`, async () => {
+const { data: codeRender, error: codeRenderError } = await useAsyncData(`${componentName}-renderer-${JSON.stringify({ slots: props.slots, code: code.value })}`, async () => {
   let formatted = ''
   try {
     // @ts-ignore
     formatted = await $prettier.format(code.value, {
       trailingComma: 'none',
       semi: false,
-      singleQuote: true
+      singleQuote: true,
     })
-  } catch {
+  }
+  catch {
     formatted = code.value
   }
 
   return parseMarkdown(formatted, {
   })
 }, {
-  watch: [code]
+  watch: [code],
 })
 </script>
 
@@ -84,21 +81,21 @@ const { data: codeRender, error: codeRenderError } = await useAsyncData(`${compo
   <div class="border border-neutral-200 dark:border-neutral-700 rounded-lg not-prose my-2 overflow-hidden">
     <div v-if="filename" class="p-4 py-2 border-b border-neutral-200 dark:border-neutral-700">
       <span class="flex items-center gap-1">
-        <component v-if="lang" :is="IconComponents[lang]" class="inline" />
+        <component :is="IconComponents[lang]" v-if="lang" class="inline" />
         <span class="text-sm text-neutral-500 dark:text-neutral-400">{{ filename }}</span>
       </span>
     </div>
 
     <div :class="['p-4 overflow-auto', !!codeRender ? 'border-b border-neutral-200 dark:border-neutral-700' : '']">
       <component :is="componentName" v-bind="componentProps">
-        <slot></slot>
+        <slot />
       </component>
     </div>
 
     <template v-if="codeRender || codeRenderError">
       <div class="overflow-auto">
         <ContentRenderer v-if="codeRender" :value="codeRender" class="p-4 bg-neutral-50 dark:bg-neutral-800/50" />
-        <pre class="p-4" v-if="codeRenderError">{{ codeRenderError }}</pre>
+        <pre v-if="codeRenderError" class="p-4">{{ codeRenderError }}</pre>
       </div>
     </template>
   </div>

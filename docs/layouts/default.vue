@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 useSeoMeta({
-  title: 'RayineSoft Common Components'
+  title: 'RayineSoft Common Components',
 })
 </script>
 
@@ -8,7 +8,7 @@ useSeoMeta({
   <div class="max-w-6xl mx-auto px-4">
     <TitleBar />
     <main class="pt-4">
-      <slot></slot>
+      <slot />
     </main>
   </div>
 </template>
@@ -22,7 +22,6 @@ body {
 .shiki span {
   background-color: rgba(0, 0, 0, 0) !important;
 } */
-
 
 /*
 @media (prefers-color-scheme: dark) {

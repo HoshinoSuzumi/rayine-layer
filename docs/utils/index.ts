@@ -1,17 +1,17 @@
 export const renderObject = (obj: any): string => {
   if (Array.isArray(obj)) {
-    return `[${obj.map(renderObject).join(", ")}]`;
+    return `[${obj.map(renderObject).join(', ')}]`
   }
 
-  if (typeof obj === "object") {
+  if (typeof obj === 'object') {
     return `{ ${Object.entries(obj)
       .map(([key, value]) => `${key}: ${renderObject(value)}`)
-      .join(", ")} }`;
+      .join(', ')} }`
   }
 
-  if (typeof obj === "string") {
-    return `'${obj}'`;
+  if (typeof obj === 'string') {
+    return `'${obj}'`
   }
 
-  return obj;
-};
+  return obj
+}
