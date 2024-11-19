@@ -70,7 +70,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
             <div>
               <span class="tip">Previous</span>
               <span class="title">{{ surround[0].title }}</span>
-              <span class="description">{{ surround[0].description }}</span>
+              <span class="description" v-if="surround[0].description">{{ surround[0].description }}</span>
             </div>
           </NuxtLink>
         </div>
@@ -79,7 +79,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
             <div>
               <span class="tip">Next</span>
               <span class="title">{{ surround[1].title }}</span>
-              <span class="description">{{ surround[1].description }}</span>
+              <span class="description" v-if="surround[1].description">{{ surround[1].description }}</span>
             </div>
           </NuxtLink>
         </div>

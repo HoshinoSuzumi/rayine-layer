@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   },
   content: {
     highlight: {
-      langs: ["postcss", "mdc", "html", "vue", "ts", "js"],
+      langs: ["postcss", "mdc", "html", "vue", "ts", "js", "bash"],
     },
   },
   mdc: {
