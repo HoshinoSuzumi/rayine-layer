@@ -9,7 +9,7 @@ const router = useRouter()
     >
       <div class="text-xl text-neutral-600 dark:text-neutral-300 font-bold">
         <h2 class="text-xl">
-          RayineUI <span class="font-medium">is multi-purpose</span>
+          RayineUI <span class="font-medium">is a multi-purpose</span>
         </h2>
         <h1 class="text-4xl text-primary">
           Customizable
