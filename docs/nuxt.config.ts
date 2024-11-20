@@ -3,7 +3,6 @@ import module from '../src/module'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-
   modules: ['@nuxt/content', '@nuxt/fonts', '@nuxtjs/color-mode', module],
   devtools: { enabled: true },
   colorMode: {
@@ -26,12 +25,12 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/components': { redirect: '/components/button' },
-  }, compatibilityDate: '2024-04-03',
+  },
+  compatibilityDate: '2024-04-03',
   typescript: {
     includeWorkspace: true,
   },
   rayui: {
-    // @ts-ignore
     globalComponents: true,
     safeColors: ['amber', 'emerald', 'red', 'sky', 'violet', 'cyan'],
   },
