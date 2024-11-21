@@ -10,54 +10,35 @@ Default button style
 Button
 ::
 
-### Variants
+### Styles
 
-#### soft
+Use the `variant` and `color` props to predefined styles and change the color of buttons.
 
 ::ComponentPreview
 ---
 props:
   variant: soft
----
-Button
-::
-
-#### outline
-
-::ComponentPreview
----
-props:
-  variant: outline
----
-Button
-::
-
-#### ghost
-
-::ComponentPreview
----
-props:
-  variant: ghost
----
-Button
-::
-
-#### link
-
-::ComponentPreview
----
-props:
-  variant: link
----
-Button
-::
-
-### Colors
-
-::ComponentPreview
----
-props:
   color: violet
+---
+Button
+::
+
+### Sizes
+
+::ComponentPreview
+---
+props:
+  size: sm
+---
+Button
+::
+
+### Block
+
+::ComponentPreview
+---
+props:
+  block: true
 ---
 Button
 ::

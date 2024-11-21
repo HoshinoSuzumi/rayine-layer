@@ -6,6 +6,7 @@ import FileTypeJavascript from '../icon/VscodeIconsFileTypeJsOfficial.vue'
 import TablerTerminal from '../icon/TablerTerminal.vue'
 
 const route = useRoute()
+const appConfig = useAppConfig()
 
 const IconComponents = {
   'vue': FileTypeVue,
@@ -38,8 +39,51 @@ const props = defineProps({
   },
 })
 
+
 const componentName = props.slug || `Ray${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
+const componentMeta = await fetchComponentMeta(componentName)
+
 const componentProps = reactive({ ...props.props })
+
+const customizableOptions = (key: string, schema: { kind: string, type: string, schema: [] }) => {
+  let options: string[] = [];
+  const invalidTypes = ['string', 'array', 'boolean', 'object', 'number', 'Function']
+  const hasInvalidType = schema?.type?.split('|')?.map(item => item.trim()?.replaceAll('"', ''))?.some(type => invalidTypes.includes(type))
+  const schemaOptions = Object.values(schema?.schema || {})
+
+  if (key.toLowerCase().endsWith('color')) {
+    options = [...appConfig.rayui.colors]
+  }
+
+  if (key.toLowerCase() === 'size' && schemaOptions?.length) {
+    const baseSizeOrder = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
+    schemaOptions.sort((a: string, b: string) => {
+      const [aBase, aNum] = [(a.match(/[a-z]+/i)?.[0].toLowerCase() || 'xs') as keyof typeof baseSizeOrder, parseInt(a.match(/\d+/)?.[0] || '1')];
+      const [bBase, bNum] = [(b.match(/[a-z]+/i)?.[0].toLowerCase() || 'xs') as keyof typeof baseSizeOrder, parseInt(b.match(/\d+/)?.[0] || '1')];
+      return aBase === bBase
+        ? (aBase === 'xs' ? bNum - aNum : aNum - bNum)
+        : baseSizeOrder[aBase] - baseSizeOrder[bBase];
+    });
+  }
+
+  if (schemaOptions?.length > 0 && schema?.kind === 'enum' && !hasInvalidType) {
+    options = schemaOptions.filter(option => option !== 'undefined' && typeof option === 'string').map((option: string) => option.replaceAll('"', ''))
+  }
+
+  return options
+}
+
+const customizableProps = computed(() => Object.keys(componentProps).map(k => {
+  const prop = componentMeta?.meta?.props?.find((prop: any) => prop.name === k)
+  const schema = prop?.schema || {}
+  const options = customizableOptions(k, schema)
+  return {
+    name: k,
+    type: prop?.type,
+    label: camelCase(k),
+    options,
+  }
+}))
 
 const code = computed(() => {
   let code = `\`\`\`html
@@ -92,13 +136,31 @@ const { data: codeRender, error: codeRenderError } = await useAsyncData(`${compo
       </component>
     </div>
 
+    <div v-if="customizableProps.length > 0" class="border-b border-neutral-200 dark:border-neutral-700 flex">
+      <div v-for="prop in customizableProps" class="px-2 py-0.5 flex flex-col gap-0.5 border-r dark:border-neutral-700">
+        <label :for="`${prop.name}-prop`" class="text-sm text-neutral-400">{{ prop.name }}</label>
+        <input v-if="prop.type.startsWith('boolean')" type="checkbox" :id="`${prop.name}-prop`" class="mt-1 mb-2"
+          v-model="componentProps[prop.name]" />
+        <select v-else-if="prop.options.length > 0" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]">
+          <option v-for="option in prop.options" :key="option" :value="option">{{ option }}</option>
+        </select>
+        <input v-else type="text" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]"
+          placeholder="type something..." />
+      </div>
+    </div>
+
     <template v-if="codeRender || codeRenderError">
-      <div class="overflow-auto">
-        <ContentRenderer v-if="codeRender" :value="codeRender" class="p-4 bg-neutral-50 dark:bg-neutral-800/50" />
+      <div class="overflow-auto bg-neutral-50 dark:bg-neutral-800/50">
+        <ContentRenderer v-if="codeRender" :value="codeRender" class="p-4" />
         <pre v-if="codeRenderError" class="p-4">{{ codeRenderError }}</pre>
       </div>
     </template>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+input,
+select {
+  @apply text-sm outline-none border-none bg-transparent;
+}
+</style>
