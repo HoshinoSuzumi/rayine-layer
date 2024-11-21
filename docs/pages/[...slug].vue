@@ -3,9 +3,6 @@ import { withoutTrailingSlash } from 'ufo'
 
 const route = useRoute()
 
-// const nav = inject<Ref<NavItem[]>>('navigation')
-// const navigation = computed(() => nav?.value)
-
 const { data: page } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
 
 if (!page.value) {
@@ -61,7 +58,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
         <h1 class="text-3xl text-primary font-medium">
           {{ page?.title || 'untitled' }}
         </h1>
-        <p v-if="page?.description" class="text-lg text-neutral-500 mt-2">
+        <p v-if="page?.description" class="text-lg text-neutral-500 dark:text-neutral-400 mt-2">
           {{ page.description }}
         </p>
       </div>
