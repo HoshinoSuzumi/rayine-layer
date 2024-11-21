@@ -1,6 +1,8 @@
 import { createResolver } from "@nuxt/kit";
 import defaultTheme from "tailwindcss/defaultTheme";
 import module from "../src/module";
+import { excludeColors } from "#rayui/utils/colors";
+import colors from "tailwindcss/colors";
 
 const { resolve } = createResolver(import.meta.url);
 
@@ -57,7 +59,7 @@ export default defineNuxtConfig({
   },
   rayui: {
     globalComponents: true,
-    safeColors: ["amber", "emerald", "red", "sky", "violet", "cyan"],
+    safeColors: [excludeColors(colors)],
   },
   tailwindcss: {
     config: {

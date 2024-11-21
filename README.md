@@ -7,7 +7,6 @@
 RayineUI is a multi-purpose customizable UI library.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/rayine-ui?file=playground%2Fapp.vue) -->
 - [📖 &nbsp;Documentation](https://rayui.uniiem.com)
 
 ## Features
