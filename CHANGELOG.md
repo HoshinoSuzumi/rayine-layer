@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.0.7...v1.1.0)
+
+### 🚀 Enhancements
+
+- **button:** Add disabled and loading state ([ed419ef](https://github.com/HoshinoSuzumi/rayine-ui/commit/ed419ef))
+
+### 📖 Documentation
+
+- Fix typo ([2b9e776](https://github.com/HoshinoSuzumi/rayine-ui/commit/2b9e776))
+
+### ❤️ Contributors
+
+- HoshinoSuzumi ([@HoshinoSuzumi](http://github.com/HoshinoSuzumi))
+- Timothy Yin ([@HoshinoSuzumi](http://github.com/HoshinoSuzumi))
+
 ## v1.0.7
 
 [compare changes](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.0.7-beta.2...v1.0.7)
