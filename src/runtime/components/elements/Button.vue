@@ -1,17 +1,26 @@
 <script lang="ts" setup>
 import { twJoin, twMerge } from 'tailwind-merge'
 import { computed, toRef, type PropType } from 'vue'
-import { button } from '../../ui.config'
 import type { DeepPartial, Strategy } from '../../types/utils'
 import type { ButtonColor, ButtonSize, ButtonVariant } from '../../types/button'
+import { getNonUndefinedValuesFromObject } from '../../utils'
+import { nuxtLinkProps } from '../../utils/link'
+import { button } from '../../ui.config'
 import { useRayUI } from '#build/imports'
 
-const config = button
-
 const props = defineProps({
+  ...nuxtLinkProps,
   class: {
     type: String,
     default: '',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
   },
   padded: {
     type: Boolean,
@@ -25,6 +34,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  label: {
+    type: String,
+    default: '',
+  },
+  to: {
+    type: String,
+    default: '',
+  },
   size: {
     type: String as PropType<ButtonSize>,
     default: () => button.default.size,
@@ -37,13 +54,19 @@ const props = defineProps({
     type: String as PropType<ButtonVariant>,
     default: () => button.default.variant,
   },
+  loadingIcon: {
+    type: String,
+    default: () => button.default.loadingIcon,
+  },
   ui: {
-    type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
+    type: Object as PropType<DeepPartial<typeof button> & { strategy?: Strategy }>,
     default: () => ({}),
   },
 })
 
-const { ui, attrs } = useRayUI('button', toRef(props, 'ui'), config)
+const extProps = computed(() => getNonUndefinedValuesFromObject(props, nuxtLinkProps))
+
+const { ui, attrs } = useRayUI('button', toRef(props, 'ui'), button)
 
 const buttonClass = computed(() => {
   // @ts-ignore
@@ -61,12 +84,14 @@ const buttonClass = computed(() => {
 </script>
 
 <template>
-  <button
-    :class="buttonClass"
-    v-bind="{ ...attrs }"
-  >
-    <slot />
-  </button>
+  <RayLink type="button" :disabled="disabled || loading" :class="buttonClass" v-bind="{ ...extProps, ...attrs }">
+    <slot name="leading" :disabled="disabled" :loading="loading">
+      <IconSpinner v-if="loading" class="mr-1" />
+    </slot>
+    <slot>
+      <span v-if="label">{{ label }}</span>
+    </slot>
+  </RayLink>
 </template>
 
 <style scoped></style>

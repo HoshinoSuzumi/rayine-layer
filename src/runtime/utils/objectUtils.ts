@@ -36,3 +36,18 @@ export const getValueByPath = (
 
   return result !== undefined ? result : defaultValue
 }
+
+export const getNonUndefinedValuesFromObject = (
+  obj: object,
+  srcObj: object,
+): object => {
+  const keys = Object.keys(srcObj) as []
+
+  return keys.reduce((acc, key) => {
+    if (obj[key] !== undefined) {
+      acc[key] = obj[key]
+    }
+
+    return acc
+  }, {})
+}

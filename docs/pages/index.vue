@@ -20,10 +20,10 @@ const router = useRouter()
       </div>
     </div>
     <div class="flex justify-center items-center gap-4">
-      <RayButton @click="router.push('/getting-started')">
+      <RayButton to="/getting-started">
         Getting Started
       </RayButton>
-      <RayButton variant="outline" @click="router.push('/components')">
+      <RayButton variant="outline" to="/components">
         Explore Components
       </RayButton>
     </div>

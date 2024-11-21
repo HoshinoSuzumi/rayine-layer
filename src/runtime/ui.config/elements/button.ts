@@ -28,6 +28,18 @@ export default {
     'lg': 'p-2.5',
     'xl': 'p-2.5',
   },
+  icon: {
+    base: 'flex-shrink-0',
+    loading: 'animate-spin',
+    size: {
+      '2xs': 'h-4 w-4',
+      'xs': 'h-4 w-4',
+      'sm': 'h-5 w-5',
+      'md': 'h-5 w-5',
+      'lg': 'h-5 w-5',
+      'xl': 'h-6 w-6',
+    },
+  },
   color: {},
   variant: {
     solid:
@@ -43,5 +55,6 @@ export default {
     size: 'sm',
     color: 'primary',
     variant: 'solid',
+    loadingIcon: 'loading',
   },
 }
