@@ -2,7 +2,7 @@ import { createResolver } from '@nuxt/kit'
 import defaultTheme from 'tailwindcss/defaultTheme'
 import colors from 'tailwindcss/colors'
 import module from '../src/module'
-import { excludeColors } from '../dist/runtime/utils/colors'
+import { excludeColors } from '../src/runtime/utils/colors'
 
 console.log(excludeColors(colors))
 
