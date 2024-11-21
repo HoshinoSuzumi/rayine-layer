@@ -39,14 +39,13 @@ const props = defineProps({
   },
 })
 
-
 const componentName = props.slug || `Ray${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 const componentMeta = await fetchComponentMeta(componentName)
 
 const componentProps = reactive({ ...props.props })
 
 const customizableOptions = (key: string, schema: { kind: string, type: string, schema: [] }) => {
-  let options: string[] = [];
+  let options: string[] = []
   const invalidTypes = ['string', 'array', 'boolean', 'object', 'number', 'Function']
   const hasInvalidType = schema?.type?.split('|')?.map(item => item.trim()?.replaceAll('"', ''))?.some(type => invalidTypes.includes(type))
   const schemaOptions = Object.values(schema?.schema || {})
@@ -56,14 +55,14 @@ const customizableOptions = (key: string, schema: { kind: string, type: string, 
   }
 
   if (key.toLowerCase() === 'size' && schemaOptions?.length) {
-    const baseSizeOrder = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
+    const baseSizeOrder = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }
     schemaOptions.sort((a: string, b: string) => {
-      const [aBase, aNum] = [(a.match(/[a-z]+/i)?.[0].toLowerCase() || 'xs') as keyof typeof baseSizeOrder, parseInt(a.match(/\d+/)?.[0] || '1')];
-      const [bBase, bNum] = [(b.match(/[a-z]+/i)?.[0].toLowerCase() || 'xs') as keyof typeof baseSizeOrder, parseInt(b.match(/\d+/)?.[0] || '1')];
+      const [aBase, aNum] = [(a.match(/[a-z]+/i)?.[0].toLowerCase() || 'xs') as keyof typeof baseSizeOrder, Number.parseInt(a.match(/\d+/)?.[0] || '1')]
+      const [bBase, bNum] = [(b.match(/[a-z]+/i)?.[0].toLowerCase() || 'xs') as keyof typeof baseSizeOrder, Number.parseInt(b.match(/\d+/)?.[0] || '1')]
       return aBase === bBase
         ? (aBase === 'xs' ? bNum - aNum : aNum - bNum)
-        : baseSizeOrder[aBase] - baseSizeOrder[bBase];
-    });
+        : baseSizeOrder[aBase] - baseSizeOrder[bBase]
+    })
   }
 
   if (schemaOptions?.length > 0 && schema?.kind === 'enum' && !hasInvalidType) {
@@ -73,7 +72,7 @@ const customizableOptions = (key: string, schema: { kind: string, type: string, 
   return options
 }
 
-const customizableProps = computed(() => Object.keys(componentProps).map(k => {
+const customizableProps = computed(() => Object.keys(componentProps).map((k) => {
   const prop = componentMeta?.meta?.props?.find((prop: any) => prop.name === k)
   const schema = prop?.schema || {}
   const options = customizableOptions(k, schema)
@@ -137,15 +136,27 @@ const { data: codeRender, error: codeRenderError } = await useAsyncData(`${compo
     </div>
 
     <div v-if="customizableProps.length > 0" class="border-b border-neutral-200 dark:border-neutral-700 flex">
-      <div v-for="prop in customizableProps" class="px-2 py-0.5 flex flex-col gap-0.5 border-r dark:border-neutral-700">
+      <div v-for="(prop, k) in customizableProps" :key="k" class="px-2 py-0.5 flex flex-col gap-0.5 border-r dark:border-neutral-700">
         <label :for="`${prop.name}-prop`" class="text-sm text-neutral-400">{{ prop.name }}</label>
-        <input v-if="prop.type.startsWith('boolean')" type="checkbox" :id="`${prop.name}-prop`" class="mt-1 mb-2"
-          v-model="componentProps[prop.name]" />
+        <input
+          v-if="prop.type.startsWith('boolean')"
+          :id="`${prop.name}-prop`"
+          v-model="componentProps[prop.name]"
+          type="checkbox"
+          class="mt-1 mb-2"
+        >
         <select v-else-if="prop.options.length > 0" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]">
-          <option v-for="option in prop.options" :key="option" :value="option">{{ option }}</option>
+          <option v-for="option in prop.options" :key="option" :value="option">
+            {{ option }}
+          </option>
         </select>
-        <input v-else type="text" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]"
-          placeholder="type something..." />
+        <input
+          v-else
+          :id="`${prop.name}-prop`"
+          v-model="componentProps[prop.name]"
+          type="text"
+          placeholder="type something..."
+        >
       </div>
     </div>
 
