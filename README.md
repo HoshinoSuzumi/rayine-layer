@@ -3,7 +3,6 @@
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
-[![Nuxt][nuxt-src]][nuxt-href]
 
 RayineUI is a multi-purpose customizable UI library.
 
@@ -70,6 +69,3 @@ That's it! You can now use Rayine UI in your Nuxt app ✨
 
 [license-src]: https://img.shields.io/npm/l/rayine-ui.svg?style=flat&colorA=020420&colorB=00DC82
 [license-href]: https://npmjs.com/package/rayine-ui
-
-[nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt.js
-[nuxt-href]: https://nuxt.com
