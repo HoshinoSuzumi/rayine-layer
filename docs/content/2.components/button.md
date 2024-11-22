@@ -43,6 +43,15 @@ props:
 Button
 ::
 
+### Label
+
+::ComponentPreview
+---
+props:
+  label: Button
+---
+::
+
 ### Disabled
 
 ::ComponentPreview
@@ -61,4 +70,9 @@ props:
   loading: true
 ---
 Button
+::
+
+## Config
+
+::ComponentDefaults
 ::
