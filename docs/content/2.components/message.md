@@ -16,7 +16,7 @@ First add the `<RayMessages>` component to your `app.vue`.
 </template>
 ```
 
-Then, use the `useMessage` composable to add notifications to your app anywhere you want.
+Then, use the `useMessage` composable to add messages to your app anywhere you want.
 
 ```vue
 <script lang="ts" setup>
