@@ -29,6 +29,14 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  options: {
+    type: Array as PropType<{ name: string, values: string[], restriction: 'expected' | 'included' | 'excluded' | 'only' }[]>,
+    default: () => []
+  },
+  excludedProps: {
+    type: Array,
+    default: () => []
+  },
   filename: {
     type: String,
     default: '',
@@ -46,13 +54,16 @@ const componentProps = reactive({ ...props.props })
 
 const customizableOptions = (key: string, schema: { kind: string, type: string, schema: [] }) => {
   let options: string[] = []
-  const invalidTypes = ['string', 'array', 'boolean', 'object', 'number', 'Function']
-  const hasInvalidType = schema?.type?.split('|')?.map(item => item.trim()?.replaceAll('"', ''))?.some(type => invalidTypes.includes(type))
-  const schemaOptions = Object.values(schema?.schema || {})
+  const optionItem = props?.options?.find(item => item?.name === key) || null
+  const types = schema?.type?.split('|')?.map(item => item.trim()?.replaceAll('"', '')) || []
+  const invalidTypes = ['string', 'number', 'boolean', 'array', 'object', 'Function', 'undefined']
+  const hasInvalidType = types?.every(type => invalidTypes.includes(type))
 
   if (key.toLowerCase().endsWith('color')) {
     options = [...appConfig.rayui.colors]
   }
+
+  const schemaOptions = Object.values(schema?.schema || {})
 
   if (key.toLowerCase() === 'size' && schemaOptions?.length) {
     const baseSizeOrder = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }
@@ -65,24 +76,41 @@ const customizableOptions = (key: string, schema: { kind: string, type: string, 
     })
   }
 
-  if (schemaOptions?.length > 0 && schema?.kind === 'enum' && !hasInvalidType) {
-    options = schemaOptions.filter(option => option !== 'undefined' && typeof option === 'string').map((option: string) => option.replaceAll('"', ''))
+  if (schemaOptions?.length > 0 && schema?.kind === 'enum' && !hasInvalidType && optionItem?.restriction !== 'only') {
+    options = schemaOptions.filter(option => typeof option === 'string' && option !== 'undefined').map((option: string) => option.replaceAll('"', ''))
+  }
+
+  if (optionItem?.restriction === 'only') {
+    options = optionItem.values
+  }
+
+  if (optionItem?.restriction === 'expected') {
+    options = options.filter(item => optionItem.values.includes(item))
+  }
+
+  if (optionItem?.restriction === 'included') {
+    options = [...options, ...optionItem.values]
+  }
+
+  if (optionItem?.restriction === 'excluded') {
+    options = options.filter(item => !optionItem.values.includes(item))
   }
 
   return options
 }
 
 const customizableProps = computed(() => Object.keys(componentProps).map((k) => {
+  if (props.excludedProps.includes(k)) return null
   const prop = componentMeta?.meta?.props?.find((prop: any) => prop.name === k)
   const schema = prop?.schema || {}
   const options = customizableOptions(k, schema)
   return {
     name: k,
-    type: prop?.type,
+    type: prop?.type || 'string',
     label: camelCase(k),
     options,
   }
-}))
+}).filter((prop) => prop !== null))
 
 const code = computed(() => {
   let code = `\`\`\`html
@@ -99,22 +127,8 @@ const code = computed(() => {
   return code
 })
 
-const { data: codeRender, error: codeRenderError } = await useAsyncData(`${componentName}-renderer-${JSON.stringify({ slots: props.slots, code: code.value })}`, async () => {
-  let formatted = ''
-  try {
-    // @ts-ignore
-    formatted = await $prettier.format(code.value, {
-      trailingComma: 'none',
-      semi: false,
-      singleQuote: true,
-    })
-  }
-  catch {
-    formatted = code.value
-  }
-
-  return parseMarkdown(formatted, {
-  })
+const { data: codeRender, error: codeRenderError } = await useAsyncData(`${componentName}-renderer-${JSON.stringify({ props: componentProps, slots: props.slots, code: code.value })}`, async () => {
+  return parseMarkdown(code.value, {})
 }, {
   watch: [code],
 })
@@ -131,32 +145,23 @@ const { data: codeRender, error: codeRenderError } = await useAsyncData(`${compo
 
     <div :class="['p-4 overflow-auto', !!codeRender ? 'border-b border-neutral-200 dark:border-neutral-700' : '']">
       <component :is="componentName" v-bind="componentProps">
-        <slot />
+        <slot></slot>
       </component>
     </div>
 
     <div v-if="customizableProps.length > 0" class="border-b border-neutral-200 dark:border-neutral-700 flex">
-      <div v-for="(prop, k) in customizableProps" :key="k" class="px-2 py-0.5 flex flex-col gap-0.5 border-r dark:border-neutral-700">
+      <div v-for="(prop, k) in customizableProps" :key="k"
+        class="px-2 py-0.5 flex flex-col gap-0.5 border-r dark:border-neutral-700">
         <label :for="`${prop.name}-prop`" class="text-sm text-neutral-400">{{ prop.name }}</label>
-        <input
-          v-if="prop.type.startsWith('boolean')"
-          :id="`${prop.name}-prop`"
-          v-model="componentProps[prop.name]"
-          type="checkbox"
-          class="mt-1 mb-2"
-        >
-        <select v-else-if="prop.options.length > 0" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]">
+        <input v-if="prop.type.startsWith('boolean')" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]"
+          type="checkbox" class="mt-1 mb-2">
+        <select v-else-if="prop.options.length" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]">
           <option v-for="option in prop.options" :key="option" :value="option">
             {{ option }}
           </option>
         </select>
-        <input
-          v-else
-          :id="`${prop.name}-prop`"
-          v-model="componentProps[prop.name]"
-          type="text"
-          placeholder="type something..."
-        >
+        <input v-else :id="`${prop.name}-prop`" v-model="componentProps[prop.name]" type="text"
+          placeholder="type something...">
       </div>
     </div>
 

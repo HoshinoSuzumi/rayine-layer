@@ -4,6 +4,10 @@ import { useState } from '#imports'
 export const useMessage = () => {
   const messages = useState<Message[]>('messages', () => [])
 
+  const generateId = () => {
+    return (Date.now() + Math.random() * 100).toString(32).toUpperCase()
+  }
+
   const add = (message: Partial<Message>) => {
     const msg = {
       id: (Date.now() + Math.random() * 100).toString(32).toUpperCase(),
@@ -38,6 +42,7 @@ export const useMessage = () => {
   }
 
   return {
+    generateId,
     add,
     update,
     remove,

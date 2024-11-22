@@ -63,98 +63,105 @@ export const setColors = (theme: TwConfig['theme']) => {
 
 const safelistForComponent: Record<
   string,
-  (colors: string) => TwConfig['safelist']
+  (colors: string) => TwConfig["safelist"]
 > = {
-  button: colorsToRegex => [
+  button: (colorsToRegex) => [
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-50$`),
-      variants: ['hover', 'disabled'],
+      variants: ["hover", "disabled"],
     },
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-100$`),
-      variants: ['hover'],
+      variants: ["hover"],
     },
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-400$`),
-      variants: ['dark', 'dark:disabled'],
+      variants: ["dark", "dark:disabled"],
     },
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-500$`),
-      variants: ['disabled', 'dark:hover', 'dark:active'],
+      variants: ["disabled", "dark:hover", "dark:active"],
     },
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-600$`),
-      variants: ['hover'],
+      variants: ["hover"],
     },
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-700$`),
-      variants: ['active'],
+      variants: ["active"],
     },
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-900$`),
-      variants: ['dark:hover'],
+      variants: ["dark:hover"],
     },
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-950$`),
-      variants: ['dark', 'dark:hover', 'dark:disabled'],
+      variants: ["dark", "dark:hover", "dark:disabled"],
     },
     {
       pattern: RegExp(`^text-(${colorsToRegex})-400$`),
-      variants: ['dark', 'dark:hover', 'dark:disabled'],
+      variants: ["dark", "dark:hover", "dark:disabled"],
     },
     {
       pattern: RegExp(`^text-(${colorsToRegex})-500$`),
-      variants: ['dark:hover', 'disabled'],
+      variants: ["dark:hover", "disabled"],
     },
     {
       pattern: RegExp(`^text-(${colorsToRegex})-600$`),
-      variants: ['hover'],
+      variants: ["hover"],
     },
     {
       pattern: RegExp(`^outline-(${colorsToRegex})-400$`),
-      variants: ['dark:focus-visible'],
+      variants: ["dark:focus-visible"],
     },
     {
       pattern: RegExp(`^outline-(${colorsToRegex})-500$`),
-      variants: ['focus-visible'],
+      variants: ["focus-visible"],
     },
     {
       pattern: RegExp(`^ring-(${colorsToRegex})-300$`),
-      variants: ['focus', 'dark:focus'],
+      variants: ["focus", "dark:focus"],
     },
     {
       pattern: RegExp(`^ring-(${colorsToRegex})-400$`),
-      variants: ['dark:focus-visible'],
+      variants: ["dark:focus-visible"],
     },
     {
       pattern: RegExp(`^ring-(${colorsToRegex})-500$`),
-      variants: ['focus-visible'],
+      variants: ["focus-visible"],
     },
   ],
-  message: colorsToRegex => [
+  message: (colorsToRegex) => [
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-50$`),
     },
     {
       pattern: RegExp(`^bg-(${colorsToRegex})-900$`),
-      variants: ['dark'],
+      variants: ["dark"],
     },
     {
       pattern: RegExp(`^text-(${colorsToRegex})-500$`),
     },
     {
       pattern: RegExp(`^text-(${colorsToRegex})-300$`),
-      variants: ['dark'],
+      variants: ["dark"],
     },
     {
       pattern: RegExp(`^border-(${colorsToRegex})-400$`),
     },
     {
       pattern: RegExp(`^border-(${colorsToRegex})-600$`),
-      variants: ['dark'],
+      variants: ["dark"],
+    },
+    {
+      pattern: RegExp(`^shadow-(${colorsToRegex})-100$`),
+    },
+    {
+      pattern: RegExp(`^shadow-(${colorsToRegex})-900$`),
+      variants: ["dark"],
     },
   ],
-}
+};
 
 export const generateSafelist = (colors: string[], globalColors: string[]) => {
   const safelist = Object.keys(safelistForComponent).flatMap(component =>

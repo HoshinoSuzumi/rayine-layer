@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ref, onMounted, defineComponent, type PropType, toRef, computed } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
-import type { Message, MessageType } from '../../types/message'
+import type { Message, MessageColor, MessageType } from '../../types/message'
 import { message } from '../../ui.config'
 import type { DeepPartial, Strategy } from '../../types'
 import { useMessage, useRayUI } from '#build/imports'
@@ -10,9 +10,25 @@ const config = message
 
 export default defineComponent({
   props: {
-    message: {
-      type: Object as PropType<Message>,
-      require: true,
+    type: {
+      type: String as PropType<MessageType>,
+      default: config.default.type,
+    },
+    color: {
+      type: String as PropType<MessageColor>,
+      default: undefined,
+    },
+    duration: {
+      type: Number,
+      default: config.default.duration,
+    },
+    content: {
+      type: String,
+      default: '',
+    },
+    id: {
+      type: String,
+      default: undefined,
     },
     class: {
       type: String,
@@ -26,28 +42,27 @@ export default defineComponent({
   setup(props) {
     const { ui, attrs } = useRayUI('message', toRef(props, 'ui'), config)
 
-    const resolvedColor = computed(() => {
-      if (!props.message?.type) return props.message?.color || ui.value.default.color || 'primary'
-      return ({
-        info: 'blue',
-        success: 'emerald',
-        warning: 'orange',
-        error: 'rose',
-      } as Record<MessageType, string>)[props.message.type]
-    })
-
     const containerClass = computed(() => {
+      const color = props.color ? props.color : (ui.value.type[props.type]?.color || ui.value.default.color)
       return twMerge(twJoin(
         ui.value.container,
         ui.value.rounded,
-        ui.value.background.replaceAll('{color}', resolvedColor.value),
-        ui.value.content.replaceAll('{color}', resolvedColor.value),
-        ui.value.border.replaceAll('{color}', resolvedColor.value),
+        ui.value.shadow.replaceAll('{color}', color),
+        ui.value.background.replaceAll('{color}', color),
+        ui.value.content.replaceAll('{color}', color),
+        ui.value.border.replaceAll('{color}', color),
       ), props.class)
     })
 
     const message = useMessage()
-    const messageBody = ref<Message>(props.message as Message)
+    const messageBody = computed<Message>(() => {
+      return {
+        id: props.id || message.generateId(),
+        content: props.content,
+        duration: props.duration,
+        type: props.type,
+      }
+    })
 
     onMounted(() => {
       setTimeout(() => {
@@ -69,10 +84,10 @@ export default defineComponent({
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
     <div :class="containerClass">
-      <IconCircleSuccess v-if="messageBody.type === 'success'" class="text-xl" />
-      <IconCircleWarning v-if="messageBody.type === 'warning'" class="text-xl" />
-      <IconCircleError v-if="messageBody.type === 'error'" class="text-xl" />
-      <IconCircleInfo v-if="messageBody.type === 'info'" class="text-xl" />
+      <IconCircleSuccess v-if="messageBody?.type === 'success'" class="text-xl" />
+      <IconCircleWarning v-if="messageBody?.type === 'warning'" class="text-xl" />
+      <IconCircleError v-if="messageBody?.type === 'error'" class="text-xl" />
+      <IconCircleInfo v-if="messageBody?.type === 'info'" class="text-xl" />
       <span>
         {{ messageBody.content }}
       </span>

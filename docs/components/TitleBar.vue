@@ -6,8 +6,8 @@ const route = useRoute()
 
 <template>
   <header
-    class="w-full flex justify-between items-center py-2 h-16 z-50 border-b sticky top-0 bg-white/90 dark:bg-neutral-900 transition-colors"
-    :class="[route.path !== '/' ? 'border-b-neutral-100 dark:border-b-neutral-800' : 'border-b-transparent dark:border-b-transparent']"
+    class="w-full flex justify-between items-center py-2 h-16 z-50 border-b sticky top-0 bg-white dark:bg-neutral-900 transition-colors"
+    :class="[route.path !== '/' ? 'border-b-neutral-200 dark:border-b-neutral-700' : 'border-b-transparent dark:border-b-transparent']"
   >
     <NuxtLink to="/" class="text-neutral-900 dark:text-neutral-100">
       <h1 class="font-medium text-xl">
