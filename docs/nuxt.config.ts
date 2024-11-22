@@ -4,8 +4,6 @@ import colors from 'tailwindcss/colors'
 import module from '../src/module'
 import { excludeColors } from '../src/runtime/utils/colors'
 
-console.log(excludeColors(colors))
-
 const { resolve } = createResolver(import.meta.url)
 
 // https://nuxt.com/docs/api/configuration/nuxt-config

@@ -5,11 +5,11 @@ provide('navigation', navigation)
 </script>
 
 <template>
-  <RayMessageProvider>
+  <RayMessages>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-  </RayMessageProvider>
+  </RayMessages>
 </template>
 
 <style>

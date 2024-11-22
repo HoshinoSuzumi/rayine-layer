@@ -7,6 +7,8 @@ export interface Message {
   duration?: number
 }
 
+export type MessageOption = Omit<Message, 'id'>
+
 export interface MessageApi {
   info: (content: string, duration?: number) => void
   success: (content: string, duration?: number) => void
