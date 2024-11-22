@@ -1,6 +1,40 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.1.0...v1.2.0)
+
+### 🚀 Enhancements
+
+- **button:** Add disabled and loading state ([ed419ef](https://github.com/HoshinoSuzumi/rayine-ui/commit/ed419ef))
+- **message:** New component `messages` and `message` ([4406130](https://github.com/HoshinoSuzumi/rayine-ui/commit/4406130))
+
+### 🩹 Fixes
+
+- **docs:** Some colors can not be rendered ([36818ce](https://github.com/HoshinoSuzumi/rayine-ui/commit/36818ce))
+- **docs:** Interactive colors rendering and lint code ([e62f759](https://github.com/HoshinoSuzumi/rayine-ui/commit/e62f759))
+- **docs:** Wrong import path ([6d95d9f](https://github.com/HoshinoSuzumi/rayine-ui/commit/6d95d9f))
+
+### 💅 Refactors
+
+- **message:** BREAKING redesign component props ([222d2e8](https://github.com/HoshinoSuzumi/rayine-ui/commit/222d2e8))
+
+### 📖 Documentation
+
+- **interactive:** Add interactive props ([355843b](https://github.com/HoshinoSuzumi/rayine-ui/commit/355843b))
+- **ui:** Adjust the readability of page title ([ce52146](https://github.com/HoshinoSuzumi/rayine-ui/commit/ce52146))
+- **message,button:** Update docs ([d9ad42d](https://github.com/HoshinoSuzumi/rayine-ui/commit/d9ad42d))
+
+### 🏡 Chore
+
+- **release:** V1.1.0 ([d3bd236](https://github.com/HoshinoSuzumi/rayine-ui/commit/d3bd236))
+- Reformat code ([09a5faa](https://github.com/HoshinoSuzumi/rayine-ui/commit/09a5faa))
+
+### ❤️ Contributors
+
+- HoshinoSuzumi <master@uniiem.com>
+
 ## v1.1.0
 
 [compare changes](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.0.7...v1.1.0)
