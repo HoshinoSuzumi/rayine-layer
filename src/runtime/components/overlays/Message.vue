@@ -1,78 +1,81 @@
-<script lang="ts" setup>
-import { inject, ref, onMounted } from 'vue'
-import type { MessageProviderApi, Message } from '../../types/message'
+<script lang="ts">
+import { ref, onMounted, defineComponent, type PropType, toRef, computed } from 'vue'
+import { twJoin, twMerge } from 'tailwind-merge'
+import type { Message, MessageType } from '../../types/message'
+import { message } from '../../ui.config'
+import type { DeepPartial, Strategy } from '../../types'
+import { useMessage, useRayUI } from '#build/imports'
 
-const providerApi = inject<MessageProviderApi>('ray-message-provider')
+const config = message
 
-const props = defineProps({
-  message: {
-    require: true,
-    type: Object,
+export default defineComponent({
+  props: {
+    message: {
+      type: Object as PropType<Message>,
+      require: true,
+    },
+    class: {
+      type: String,
+      default: '',
+    },
+    ui: {
+      type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
+      default: () => ({}),
+    },
   },
-})
+  setup(props) {
+    const { ui, attrs } = useRayUI('message', toRef(props, 'ui'), config)
 
-const message = ref<Message>(props.message as Message)
+    const resolvedColor = computed(() => {
+      if (!props.message?.type) return props.message?.color || ui.value.default.color || 'primary'
+      return ({
+        info: 'blue',
+        success: 'emerald',
+        warning: 'orange',
+        error: 'rose',
+      } as Record<MessageType, string>)[props.message.type]
+    })
 
-onMounted(() => {
-  setTimeout(() => {
-    providerApi?.destroy(message.value.id)
-  }, message.value?.duration || 3000)
+    const containerClass = computed(() => {
+      return twMerge(twJoin(
+        ui.value.container,
+        ui.value.rounded,
+        ui.value.background.replaceAll('{color}', resolvedColor.value),
+        ui.value.content.replaceAll('{color}', resolvedColor.value),
+        ui.value.border.replaceAll('{color}', resolvedColor.value),
+      ), props.class)
+    })
+
+    const message = useMessage()
+    const messageBody = ref<Message>(props.message as Message)
+
+    onMounted(() => {
+      setTimeout(() => {
+        message.remove(messageBody.value.id)
+      }, messageBody.value?.duration || ui.value.default.duration)
+    })
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      attrs,
+      messageBody,
+      containerClass,
+    }
+  },
 })
 </script>
 
 <template>
-  <div
-    class="message"
-    :class="{
-      [message.type]: message.type,
-    }"
-  >
-    <IconCircleSuccess
-      v-if="message.type === 'success'"
-      class="text-xl"
-    />
-    <IconCircleWarning
-      v-if="message.type === 'warning'"
-      class="text-xl"
-    />
-    <IconCircleError
-      v-if="message.type === 'error'"
-      class="text-xl"
-    />
-    <IconCircleInfo
-      v-if="message.type === 'info'"
-      class="text-xl"
-    />
-    <span>
-      {{ message.content }}
-    </span>
+  <div :class="ui.wrapper" v-bind="attrs">
+    <div :class="containerClass">
+      <IconCircleSuccess v-if="messageBody.type === 'success'" class="text-xl" />
+      <IconCircleWarning v-if="messageBody.type === 'warning'" class="text-xl" />
+      <IconCircleError v-if="messageBody.type === 'error'" class="text-xl" />
+      <IconCircleInfo v-if="messageBody.type === 'info'" class="text-xl" />
+      <span>
+        {{ messageBody.content }}
+      </span>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.message {
-  min-width: 80px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
-  @apply h-fit px-2 py-1.5 border bg-white border-gray-300 rounded-md text-gray-500 text-xs font-sans flex items-center gap-1.5 first-of-type:mt-2.5 mt-2.5 font-bold pointer-events-auto;
-}
-
-.message.info {
-  box-shadow: 0 4px 12px rgba(59, 130, 246, .2);
-  @apply !text-blue-500 !border-blue-400 !bg-blue-50 dark:!text-blue-300 dark:!border-blue-600 dark:!bg-blue-900;
-}
-
-.message.success {
-  box-shadow: 0 4px 12px rgba(16, 185, 129, .2);
-  @apply !text-emerald-500 !border-emerald-400 !bg-emerald-50 dark:!text-emerald-300 dark:!border-emerald-600 dark:!bg-emerald-900;
-}
-
-.message.warning {
-  box-shadow: 0 4px 12px rgba(249, 115, 22, .2);
-  @apply !text-orange-500 !border-orange-400 !bg-orange-50 dark:!text-orange-300 dark:!border-orange-600 dark:!bg-orange-900;
-}
-
-.message.error {
-  box-shadow: 0 4px 12px rgba(244, 63, 94, .2);
-  @apply !text-rose-500 !border-rose-400 !bg-rose-50 dark:!text-rose-300 dark:!border-rose-600 dark:!bg-rose-900;
-}
-</style>

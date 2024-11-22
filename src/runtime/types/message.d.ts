@@ -1,9 +1,14 @@
+import type { message } from '../ui.config'
+import type colors from '#ray-colors'
+
 export type MessageType = 'success' | 'warning' | 'error' | 'info'
+export type MessageColor = (typeof colors)[number]
 
 export interface Message {
   id: string
   content: string
   type: MessageType
+  color?: MessageColor
   duration?: number
 }
 

@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-const router = useRouter()
-const message = useMessage()
 </script>
 
 <template>
   <div class="flex flex-col gap-8">
     <div
-      class="py-20 flex flex-col justify-center items-center rounded-xl border border-neutral-200 dark:border-neutral-800 pattern">
+      class="py-20 flex flex-col justify-center items-center rounded-xl border border-neutral-200 dark:border-neutral-800 pattern"
+    >
       <div class="text-xl text-neutral-600 dark:text-neutral-300 font-bold">
         <h2 class="text-xl">
           RayineUI <span class="font-medium">is a multi-purpose</span>
@@ -25,9 +24,6 @@ const message = useMessage()
       </RayButton>
       <RayButton variant="outline" to="/components">
         Explore Components
-      </RayButton>
-      <RayButton variant="outline" @click="message.success('rayui')">
-        Message
       </RayButton>
     </div>
   </div>
