@@ -3,6 +3,7 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 import colors from 'tailwindcss/colors'
 import module from '../src/module'
 import { excludeColors } from '../src/runtime/utils/colors'
+import pkg from '../package.json'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -32,6 +33,11 @@ export default defineNuxtConfig({
         dark: 'material-theme',
       },
       themes: ['material-theme-lighter', 'material-theme'],
+    },
+  },
+  runtimeConfig: {
+    public: {
+      version: pkg.version,
     },
   },
   routeRules: {

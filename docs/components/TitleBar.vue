@@ -2,6 +2,7 @@
 // const appConfig = useAppConfig();
 // appConfig.rayui.primary = 'red';
 const route = useRoute()
+const runtimeConfig = useRuntimeConfig().public
 </script>
 
 <template>
@@ -11,18 +12,18 @@ const route = useRoute()
   >
     <NuxtLink to="/" class="text-neutral-900 dark:text-neutral-100">
       <h1 class="font-medium text-xl">
-        RayineSoft<sup class="text-sm"> &copy;</sup>
+        RayineUI<sup class="text-xs">&nbsp;<span class="text-primary font-medium">{{ runtimeConfig.version }}</span></sup>
       </h1>
       <h2 class="font-normal text-xs">
-        Common Components
+        RayineSoft Components Lib
       </h2>
     </NuxtLink>
     <div class="flex items-center gap-4">
       <NuxtLink
-        to="/getting-started"
+        to="https://github.com/HoshinoSuzumi/rayine-ui"
+        target="_blank"
         class="text-neutral-400 dark:text-neutral-500"
-        active-class="!text-neutral-700 dark:!text-neutral-300"
-      >Docs</NuxtLink>
+      >GitHub</NuxtLink>
     </div>
   </header>
 </template>

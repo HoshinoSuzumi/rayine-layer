@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "description": "RayineSoft UI Components",
   "repository": "HoshinoSuzumi/rayine-ui",
+  "homepage": "https://rayui.uniiem.com",
   "license": "MIT",
   "type": "module",
   "exports": {
