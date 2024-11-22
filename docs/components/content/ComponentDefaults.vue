@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { camelCase, upperFirst } from 'scule';
+import { camelCase, upperFirst } from 'scule'
 import * as config from '#rayui/ui.config'
 
 const route = useRoute()

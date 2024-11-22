@@ -1,6 +1,6 @@
+import type { AppConfig } from 'nuxt/schema'
 import type { message } from '../ui.config'
 import type colors from '#ray-colors'
-import type { AppConfig } from 'nuxt/schema';
 
 export type MessageType = keyof typeof message.type
 export type MessageColor = (typeof colors)[number]

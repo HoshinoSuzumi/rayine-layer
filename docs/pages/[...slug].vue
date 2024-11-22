@@ -38,8 +38,11 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
               </NuxtLink>
               <ul v-if="link.children" class="pl-4 pt-2 space-y-1">
                 <li v-for="child in link.children" :key="child._path">
-                  <NuxtLink :to="child._path" class="text-sm text-neutral-500 dark:text-neutral-400"
-                    active-class="text-primary font-medium">
+                  <NuxtLink
+                    :to="child._path"
+                    class="text-sm text-neutral-500 dark:text-neutral-400"
+                    active-class="text-primary font-medium"
+                  >
                     {{ child.title }}
                   </NuxtLink>
                 </li>
@@ -65,7 +68,8 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
       </div>
 
       <div
-        class="w-full flex justify-between gap-4 mt-12 pt-12 border-t border-t-neutral-200 dark:border-t-neutral-700">
+        class="w-full flex justify-between gap-4 mt-12 pt-12 border-t border-t-neutral-200 dark:border-t-neutral-700"
+      >
         <div class="flex-1">
           <NuxtLink v-if="surround?.[0]" :to="surround[0]._path" class="surround-btn">
             <div>
@@ -89,14 +93,14 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 
     <div v-if="hasToc" class="hidden" :class="{ 'col-span-2 md:block': hasToc }">
       <div
-        class="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg px-4 py-3 overflow-hidden overflow-y-auto sticky top-[calc(64px+16px)]">
+        class="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg px-4 py-3 overflow-hidden overflow-y-auto sticky top-[calc(64px+16px)]"
+      >
         <span class="text-xs text-neutral-600 dark:text-neutral-300 font-medium inline-block mb-2">
           Table of contents
         </span>
         <Toc :toc="page!.body!.toc!.links" />
       </div>
     </div>
-
   </div>
 </template>
 
