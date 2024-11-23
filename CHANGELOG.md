@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.1
+
+[compare changes](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.3.0...v1.3.1)
+
+### 🩹 Fixes
+
+- **docs:** Hydration mismatch ([d685aae](https://github.com/HoshinoSuzumi/rayine-ui/commit/d685aae))
+
+### ❤️ Contributors
+
+- HoshinoSuzumi ([@HoshinoSuzumi](http://github.com/HoshinoSuzumi))
+
 ## v1.3.0
 
 [compare changes](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.2.0...v1.3.0)
