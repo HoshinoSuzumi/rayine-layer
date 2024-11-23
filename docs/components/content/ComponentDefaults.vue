@@ -28,11 +28,11 @@ ${json5.stringify(defaults, null, 2).replace(/,(\s+[}\]|])/g, '$1')}
 </script>
 
 <template>
-  <ContentRenderer :value="defaultsRender!" />
+  <ContentRendererMarkdown :value="defaultsRender!" />
 </template>
 
 <style>
-pre.shiki > code > span {
+pre.shiki>code>span {
   @apply text-wrap break-words;
 }
 </style>

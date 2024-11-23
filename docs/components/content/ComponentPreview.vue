@@ -37,14 +37,6 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  filename: {
-    type: String,
-    default: '',
-  },
-  lang: {
-    type: String as PropType<keyof typeof IconComponents>,
-    default: '',
-  },
 })
 
 const componentName = props.slug || `Ray${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
@@ -127,7 +119,7 @@ const code = computed(() => {
   return code
 })
 
-const { data: codeRender, error: codeRenderError } = await useAsyncData(`${componentName}-code-renderer-${JSON.stringify({ props: componentProps, slots: props.slots, code: code.value })}`, async () => {
+const { data: codeRender } = await useAsyncData(`${componentName}-code-renderer-${JSON.stringify({ props: componentProps, slots: props.slots, code: code.value })}`, async () => {
   return parseMarkdown(code.value, {})
 }, {
   watch: [code],
@@ -136,13 +128,6 @@ const { data: codeRender, error: codeRenderError } = await useAsyncData(`${compo
 
 <template>
   <div class="border border-neutral-200 dark:border-neutral-700 rounded-lg not-prose my-2 overflow-hidden">
-    <div v-if="filename" class="p-4 py-2 border-b border-neutral-200 dark:border-neutral-700">
-      <span class="flex items-center gap-1">
-        <component :is="IconComponents[lang]" v-if="lang" class="inline" />
-        <span class="text-sm text-neutral-500 dark:text-neutral-400">{{ filename }}</span>
-      </span>
-    </div>
-
     <div :class="['p-4 overflow-auto', !!codeRender ? 'border-b border-neutral-200 dark:border-neutral-700' : '']">
       <component :is="componentName" v-bind="componentProps">
         <slot />
