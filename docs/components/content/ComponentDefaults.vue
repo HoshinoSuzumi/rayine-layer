@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { camelCase, upperFirst } from 'scule'
 import * as config from '#rayui/ui.config'
+import json5 from 'json5'
 
 const route = useRoute()
 
@@ -16,18 +17,23 @@ const componentCamelName = camelCase(slug)
 const componentName = `Ray${upperFirst(componentCamelName)}`
 
 const defaults = config[componentCamelName as keyof typeof config]
+console.log(componentCamelName, JSON.stringify(defaults));
 
-const { data: defaultsRender } = await useAsyncData(`${componentName}-defaults`, () => parseMarkdown(`
-\`\`\`json
-${JSON.stringify(defaults, null, 2)}
+const { data: defaultsRender } = await useAsyncData(`${componentName}-defaults`, () => {
+  return parseMarkdown(`
+\`\`\`yaml
+${json5.stringify(defaults, null, 2).replace(/,(\s+[}\]\|])/g, '$1') }
 \`\`\`
-`, {}))
+`)
+})
 </script>
 
 <template>
-  <ContentRenderer v-if="defaultsRender?.body" :value="defaultsRender" />
+  <ContentRenderer :value="defaultsRender!" />
 </template>
 
-<style scoped>
-
+<style>
+pre.shiki > code > span {
+  @apply text-wrap break-words;
+}
 </style>

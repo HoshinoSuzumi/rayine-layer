@@ -23,6 +23,34 @@ props:
 Button
 ::
 
+#### Match
+
+The color of the buttons will match the color theme.
+
+::ComponentPreview
+---
+props:
+  color: match
+excludedProps:
+  - color
+---
+Button
+::
+
+#### Invert
+
+The color of the buttons will be the opposite of the color theme.
+
+::ComponentPreview
+---
+props:
+  color: invert
+excludedProps:
+  - color
+---
+Button
+::
+
 ### Sizes
 
 ::ComponentPreview
@@ -58,6 +86,7 @@ props:
 ---
 props:
   disabled: true
+  variant: solid
 ---
 Button
 ::
@@ -68,6 +97,7 @@ Button
 ---
 props:
   loading: true
+  variant: solid
 ---
 Button
 ::

@@ -41,7 +41,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
                   <NuxtLink
                     :to="child._path"
                     class="text-sm text-neutral-500 dark:text-neutral-400"
-                    active-class="text-primary font-medium"
+                    active-class="text-primary dark:text-primary font-medium"
                   >
                     {{ child.title }}
                   </NuxtLink>

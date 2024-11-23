@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    '/components': { redirect: '/components/button' },
+    '/components': { redirect: '/components/button', prerender: false },
   },
   compatibilityDate: '2024-04-03',
   typescript: {

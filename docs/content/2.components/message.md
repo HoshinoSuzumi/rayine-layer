@@ -6,7 +6,7 @@ description: The message component is used to display a message to the user
 
 First add the `<RayMessages>` component to your `app.vue`.
 
-```js
+```js [app.vue]{6}
 <template>
   <NuxtLayout>
     <NuxtPage />
@@ -18,7 +18,7 @@ First add the `<RayMessages>` component to your `app.vue`.
 
 Then, use the `useMessage` composable to add messages to your app anywhere you want.
 
-```vue
+```vue [pages/index.vue]{2,5-8}
 <script lang="ts" setup>
 const message = useMessage()
 
