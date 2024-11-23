@@ -86,12 +86,13 @@ export default defineComponent({
     })
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
       extProps,
       buttonClass,
     }
-  }
+  },
 })
 </script>
 

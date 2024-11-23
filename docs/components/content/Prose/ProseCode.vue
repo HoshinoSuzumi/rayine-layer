@@ -8,24 +8,24 @@
 defineProps({
   code: {
     type: String,
-    default: ''
+    default: '',
   },
   language: {
     type: String,
-    default: null
+    default: null,
   },
   filename: {
     type: String,
-    default: null
+    default: null,
   },
   highlights: {
     type: Array as () => number[],
-    default: () => []
+    default: () => [],
   },
   meta: {
     type: String,
-    default: null
-  }
+    default: null,
+  },
 })
 </script>
 
@@ -41,6 +41,4 @@ pre code .line {
 pre code .line.highlight {
   @apply !bg-gray-200/50 dark:!bg-gray-800;
 }
-
-
 </style>

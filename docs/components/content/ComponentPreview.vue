@@ -150,18 +150,31 @@ const { data: codeRender, error: codeRenderError } = await useAsyncData(`${compo
     </div>
 
     <div v-if="customizableProps.length > 0" class="border-b border-neutral-200 dark:border-neutral-700 flex">
-      <div v-for="(prop, k) in customizableProps" :key="k"
-        class="px-2 py-0.5 flex flex-col gap-0.5 border-r dark:border-neutral-700">
+      <div
+        v-for="(prop, k) in customizableProps"
+        :key="k"
+        class="px-2 py-0.5 flex flex-col gap-0.5 border-r dark:border-neutral-700"
+      >
         <label :for="`${prop.name}-prop`" class="text-sm text-neutral-400">{{ prop.name }}</label>
-        <input v-if="prop.type.startsWith('boolean')" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]"
-          type="checkbox" class="mt-1 mb-2">
+        <input
+          v-if="prop.type.startsWith('boolean')"
+          :id="`${prop.name}-prop`"
+          v-model="componentProps[prop.name]"
+          type="checkbox"
+          class="mt-1 mb-2"
+        >
         <select v-else-if="prop.options.length" :id="`${prop.name}-prop`" v-model="componentProps[prop.name]">
           <option v-for="option in prop.options" :key="option" :value="option">
             {{ option }}
           </option>
         </select>
-        <input v-else :id="`${prop.name}-prop`" v-model="componentProps[prop.name]" type="text"
-          placeholder="type something...">
+        <input
+          v-else
+          :id="`${prop.name}-prop`"
+          v-model="componentProps[prop.name]"
+          type="text"
+          placeholder="type something..."
+        >
       </div>
     </div>
 
