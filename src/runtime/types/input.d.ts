@@ -1,5 +1,4 @@
 import type { AppConfig } from 'nuxt/schema'
-import type { InputHTMLAttributes } from 'vue'
 import type { input } from '../ui.config'
 import type { ExtractDeepKey } from './utils'
 import type colors from '#ray-colors'
