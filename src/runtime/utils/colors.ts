@@ -161,6 +161,24 @@ const safelistForComponent: Record<
       variants: ['dark'],
     },
   ],
+  input: colorsToRegex => [
+    {
+      pattern: RegExp(`^text-(${colorsToRegex})-400$`),
+      variants: ['placeholder'],
+    },
+    {
+      pattern: RegExp(`^text-(${colorsToRegex})-500$`),
+      variants: ['dark:placeholder'],
+    },
+    {
+      pattern: RegExp(`^ring-(${colorsToRegex})-400$`),
+      variants: ['dark:focus'],
+    },
+    {
+      pattern: RegExp(`^ring-(${colorsToRegex})-500$`),
+      variants: ['focus'],
+    },
+  ],
 }
 
 export const generateSafelist = (colors: string[], globalColors: string[]) => {

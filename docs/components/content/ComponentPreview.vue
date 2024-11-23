@@ -1,20 +1,9 @@
 <script lang="ts" setup>
 import { camelCase, kebabCase, upperFirst } from 'scule'
-import FileTypeVue from '../icon/VscodeIconsFileTypeVue.vue'
-import FileTypeTypescript from '../icon/VscodeIconsFileTypeTypescriptOfficial.vue'
-import FileTypeJavascript from '../icon/VscodeIconsFileTypeJsOfficial.vue'
-import TablerTerminal from '../icon/TablerTerminal.vue'
 
 const route = useRoute()
 const appConfig = useAppConfig()
-
-const IconComponents = {
-  'vue': FileTypeVue,
-  'vue-html': FileTypeVue,
-  'sh': TablerTerminal,
-  'ts': FileTypeTypescript,
-  'js': FileTypeJavascript,
-}
+const { $prettier } = useNuxtApp()
 
 const props = defineProps({
   slug: {
@@ -25,6 +14,14 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  privateProps: {
+    type: Object,
+    default: () => ({}),
+  },
+  excludedProps: {
+    type: Array,
+    default: () => [],
+  },
   slots: {
     type: Object,
     default: () => ({}),
@@ -33,16 +30,21 @@ const props = defineProps({
     type: Array as PropType<{ name: string, values: string[], restriction: 'expected' | 'included' | 'excluded' | 'only' }[]>,
     default: () => [],
   },
-  excludedProps: {
-    type: Array,
-    default: () => [],
-  },
 })
 
 const componentName = props.slug || `Ray${upperFirst(camelCase(route.params.slug[route.params.slug.length - 1]))}`
 const componentMeta = await fetchComponentMeta(componentName)
 
+const privateProps = reactive({ ...props.privateProps })
 const componentProps = reactive({ ...props.props })
+
+const componentFullProps = computed(() => ({ ...componentProps, ...privateProps }))
+const componentVModel = computed({
+  get: () => privateProps.modelValue,
+  set: (value) => {
+    privateProps.modelValue = value
+  },
+})
 
 const customizableOptions = (key: string, schema: { kind: string, type: string, schema: [] }) => {
   let options: string[] = []
@@ -99,7 +101,7 @@ const customizableProps = computed(() => Object.keys(componentProps).map((k) => 
   return {
     name: k,
     type: prop?.type || 'string',
-    label: camelCase(k),
+    label: k === 'modelValue' ? 'value' : camelCase(k),
     options,
   }
 }).filter(prop => prop !== null))
@@ -109,8 +111,12 @@ const code = computed(() => {
 <template>
   <${componentName}`
 
-  for (const [k, v] of Object.entries(componentProps)) {
-    code += ` ${typeof v === 'boolean' || typeof v === 'number' || typeof v === 'object' ? ':' : ''}${kebabCase(k)}="${typeof v === 'object' ? renderObject(v) : v}"`
+  for (const [k, v] of Object.entries(componentFullProps.value)) {
+    if (v === 'undefined' || v === null) {
+      continue
+    }
+
+    code += ` ${(typeof v === 'boolean' && (k === 'modelValue' || v !== true)) || typeof v === 'number' || typeof v === 'object' ? ':' : ''}${k === 'modelValue' ? 'model-value' : kebabCase(k)}${k !== 'modelValue' && typeof v === 'boolean' && !!v ? '' : `="${typeof v === 'object' ? renderObject(v) : v}"`}`
   }
 
   code += `/>\n</template>
@@ -120,7 +126,17 @@ const code = computed(() => {
 })
 
 const { data: codeRender } = await useAsyncData(`${componentName}-code-renderer-${JSON.stringify({ props: componentProps, slots: props.slots, code: code.value })}`, async () => {
-  return parseMarkdown(code.value, {})
+  let fortmattedCode = ''
+  try {
+    fortmattedCode = await $prettier.format(code.value, {
+      semi: false,
+      singleQuote: true,
+    })
+  }
+  catch (e) {
+    fortmattedCode = code.value
+  }
+  return parseMarkdown(fortmattedCode)
 }, {
   watch: [code],
 })
@@ -128,9 +144,12 @@ const { data: codeRender } = await useAsyncData(`${componentName}-code-renderer-
 
 <template>
   <div class="border border-neutral-200 dark:border-neutral-700 rounded-lg not-prose my-2 overflow-hidden">
-    <div :class="['p-4 overflow-auto', !!codeRender ? 'border-b border-neutral-200 dark:border-neutral-700' : '']">
-      <component :is="componentName" v-bind="componentProps">
-        <slot />
+    <div :class="['p-4 overflow-auto flex', !!codeRender ? 'border-b border-neutral-200 dark:border-neutral-700' : '']">
+      <component :is="componentName" v-model="componentVModel" v-bind="componentFullProps">
+        <ContentSlot v-if="$slots.default" :use="$slots.default" />
+        <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
+          <ContentSlot :name="slot" unwrap="p" />
+        </template>
       </component>
     </div>
 
@@ -153,17 +172,20 @@ const { data: codeRender } = await useAsyncData(`${componentName}-code-renderer-
             {{ option }}
           </option>
         </select>
-        <input
+        <RayInput
           v-else
           :id="`${prop.name}-prop`"
-          v-model="componentProps[prop.name]"
-          type="text"
+          :model-value="componentProps[prop.name]"
+          :type="prop.type === 'number' ? 'number' : 'text'"
+          variant="plain"
+          :padded="false"
           placeholder="type something..."
-        >
+          @update:model-value="val => componentProps[prop.name] = prop.type === 'number' ? Number(val) : val"
+        />
       </div>
     </div>
 
-    <ContentRenderer v-if="codeRender" :value="codeRender" class="overflow-auto [&_.pre]:rounded-none [&_.pre]:border-none" />
+    <ContentRenderer v-if="codeRender" :value="codeRender" class="[&_.pre]:rounded-none [&_.pre]:border-none" />
   </div>
 </template>
 
