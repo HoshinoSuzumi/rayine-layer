@@ -13,10 +13,7 @@ export type InputColor =
 export type InputVariant =
   | keyof typeof input.variant
   | ExtractDeepKey<AppConfig, ['rayui', 'input', 'variant']>
-export type InputType = Extract<
-  'text' | 'password' | 'number' | 'url' | 'email' | 'search' | 'file' | 'hidden',
-  InputHTMLAttributes['type']
->
+export type InputType = 'text' | 'password' | 'number' | 'url' | 'email' | 'search' | 'file' | 'hidden'
 export type InputModelModifiers = {
   number?: boolean
   trim?: boolean
