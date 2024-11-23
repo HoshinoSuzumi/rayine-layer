@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.2.0...v1.3.0)
+
+### 🚀 Enhancements
+
+- **Button): add match and invert color mode refactor(docs:** Update docs ([0e070c8](https://github.com/HoshinoSuzumi/rayine-ui/commit/0e070c8))
+
+### 💅 Refactors
+
+- **button:** Export defineComponent instead of setup ([15aa231](https://github.com/HoshinoSuzumi/rayine-ui/commit/15aa231))
+
+### 📖 Documentation
+
+- **message:** Fix typo ([f68fa2f](https://github.com/HoshinoSuzumi/rayine-ui/commit/f68fa2f))
+
+### 🏡 Chore
+
+- Show the version of rayine-ui in the header ([421de5a](https://github.com/HoshinoSuzumi/rayine-ui/commit/421de5a))
+- Lint code ([69cbab8](https://github.com/HoshinoSuzumi/rayine-ui/commit/69cbab8))
+
+### ❤️ Contributors
+
+- HoshinoSuzumi ([@HoshinoSuzumi](http://github.com/HoshinoSuzumi))
+
 ## v1.2.0
 
 [compare changes](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.1.0...v1.2.0)
