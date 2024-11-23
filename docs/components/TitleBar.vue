@@ -10,13 +10,17 @@ const runtimeConfig = useRuntimeConfig().public
     class="w-full flex justify-between items-center py-2 h-16 z-50 border-b sticky top-0 bg-white dark:bg-neutral-900 transition-colors"
     :class="[route.path !== '/' ? 'border-b-neutral-200 dark:border-b-neutral-700' : 'border-b-transparent dark:border-b-transparent']"
   >
-    <NuxtLink to="/" class="text-neutral-900 dark:text-neutral-100">
-      <h1 class="font-medium text-xl">
-        RayineUI<sup class="text-xs">&nbsp;<span class="text-primary font-medium">{{ runtimeConfig.version }}</span></sup>
+    <NuxtLink to="/" class="flex items-center gap-2 text-neutral-900 dark:text-neutral-100 group">
+      <Logo />
+      <h1 class="flex flex-col">
+        <span class="block font-medium text-xl leading-none">
+          RayineUI
+          <sup class="text-xs"><span class="text-primary font-medium">{{ runtimeConfig.version }}</span></sup>
+        </span>
+        <span class="block font-normal text-xs leading-none">
+          RayineSoft Components Lib
+        </span>
       </h1>
-      <h2 class="font-normal text-xs">
-        RayineSoft Components Lib
-      </h2>
     </NuxtLink>
     <div class="flex items-center gap-4">
       <NuxtLink
@@ -28,4 +32,8 @@ const runtimeConfig = useRuntimeConfig().public
   </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+#rayine .cls-1 {
+  @apply !bg-white dark:bg-neutral-900;
+}
+</style>
