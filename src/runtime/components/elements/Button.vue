@@ -4,8 +4,8 @@ import { computed, defineComponent, toRef, type PropType } from 'vue'
 import { getNonUndefinedValuesFromObject } from '../../utils'
 import { nuxtLinkProps } from '../../utils/link'
 import { button } from '../../ui.config'
-import { useRayUI } from '#build/imports'
 import type { ButtonColor, ButtonSize, ButtonVariant, DeepPartial, Strategy } from '../../types/index'
+import { useRayUI } from '#build/imports'
 
 const config = button
 

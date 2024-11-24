@@ -2,8 +2,8 @@
 import { ref, onMounted, defineComponent, type PropType, toRef, computed } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
 import { message } from '../../ui.config'
-import { useMessage, useRayUI } from '#build/imports'
 import type { DeepPartial, Message, MessageColor, MessageType, Strategy } from '../../types/index'
+import { useMessage, useRayUI } from '#build/imports'
 
 const config = message
 
