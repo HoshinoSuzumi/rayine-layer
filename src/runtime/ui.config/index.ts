@@ -3,6 +3,7 @@ export { default as standard } from './standard'
 
 // elements
 export { default as button } from './elements/button'
+export { default as kbd } from './elements/kbd'
 
 // forms
 export { default as input } from './forms/input'
