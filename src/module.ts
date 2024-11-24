@@ -9,7 +9,7 @@ import {
 } from '@nuxt/kit'
 import { name, version } from '../package.json'
 import { installTailwind } from './tailwind'
-import type { Strategy, DeepPartial } from './runtime/types/utils'
+import type { Strategy, DeepPartial } from './runtime/types/index'
 import { createTemplates } from './template'
 
 const _require = createRequire(import.meta.url)

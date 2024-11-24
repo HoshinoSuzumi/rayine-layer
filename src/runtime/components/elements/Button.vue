@@ -1,12 +1,11 @@
 <script lang="ts">
 import { twJoin, twMerge } from 'tailwind-merge'
 import { computed, defineComponent, toRef, type PropType } from 'vue'
-import type { DeepPartial, Strategy } from '../../types/utils'
-import type { ButtonColor, ButtonSize, ButtonVariant } from '../../types/button'
 import { getNonUndefinedValuesFromObject } from '../../utils'
 import { nuxtLinkProps } from '../../utils/link'
 import { button } from '../../ui.config'
 import { useRayUI } from '#build/imports'
+import type { ButtonColor, ButtonSize, ButtonVariant, DeepPartial, Strategy } from '../../types/index'
 
 const config = button
 

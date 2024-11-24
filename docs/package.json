@@ -1,5 +1,6 @@
 {
   "name": "rayine-ui-docs",
+  "private": true,
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -16,7 +17,7 @@
     "nuxt-component-meta": "^0.9.0",
     "nuxt-shiki": "^0.3.0",
     "prettier": "^3.3.3",
-    "rayine-ui": "workspace:rayine-ui",
+    "rayine-ui": "latest",
     "ufo": "^1.5.4",
     "vue": "latest",
     "vue-router": "latest"

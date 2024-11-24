@@ -1,11 +1,10 @@
 <script lang="ts">
-import { computed, defineComponent, ref, toRef, type PropType } from 'vue'
+import { computed, defineComponent, toRef, type PropType } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
-import type { Message, MessageType } from '../../types/message'
 import { messages } from '../../ui.config'
-import type { DeepPartial, Strategy } from '../../types'
 import { useState } from '#imports'
 import { useRayUI } from '#build/imports'
+import type { DeepPartial, Message, Strategy } from '../../types/index'
 
 const config = messages
 
