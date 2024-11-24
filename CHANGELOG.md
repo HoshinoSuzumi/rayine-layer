@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.3-beta.1](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.3.2...v1.3.3-beta.1) (2024-11-24)
+
+### Performance Improvements
+
+* **input:** update InputType in input.d.ts ([e9b9b07](https://github.com/HoshinoSuzumi/rayine-ui/commit/e9b9b070f75bd4b1c401801986e3208bf5b6aa0c))
+
 ## [1.3.2](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.3.1...v1.3.2) (2024-11-23)
 
 ## v1.3.1
