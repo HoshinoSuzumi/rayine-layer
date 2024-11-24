@@ -11,7 +11,7 @@ const runtimeConfig = useRuntimeConfig().public
     :class="[route.path !== '/' ? 'border-b-neutral-200 dark:border-b-neutral-700' : 'border-b-transparent dark:border-b-transparent']"
   >
     <NuxtLink to="/" class="flex items-center gap-2 text-neutral-900 dark:text-neutral-100 group">
-      <Logo />
+      <Logo class="-mt-0.5" />
       <h1 class="flex flex-col">
         <span class="block font-medium text-xl leading-none">
           RayineUI

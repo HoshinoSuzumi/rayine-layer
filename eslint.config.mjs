@@ -10,7 +10,7 @@ export default createConfigForNuxt({
     stylistic: true,
   },
   dirs: {
-    src: ['./playground'],
+    src: ['./playground', './docs'],
   },
 }).overrideRules({
   '@typescript-eslint/no-unused-expressions': [

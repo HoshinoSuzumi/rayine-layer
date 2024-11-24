@@ -1,5 +1,6 @@
 ---
 description: The input component is used to get user input
+since: 1.3.2
 ---
 
 ## Usage

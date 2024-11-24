@@ -1,5 +1,6 @@
 ---
 description: The message component is used to display a message to the user
+since: 1.2.0
 ---
 
 ## Usage

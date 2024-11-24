@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { withoutTrailingSlash } from 'ufo'
+import { standard } from '#rayui/ui.config'
 
 const route = useRoute()
 
@@ -40,10 +41,10 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
                 <li v-for="child in link.children" :key="child._path">
                   <NuxtLink
                     :to="child._path"
-                    class="text-sm text-neutral-500 dark:text-neutral-400"
+                    class="text-sm text-neutral-500 dark:text-neutral-400 flex items-center gap-1"
                     active-class="text-primary dark:text-primary font-medium"
                   >
-                    {{ child.title }}
+                    <span>{{ child.title }}</span>
                   </NuxtLink>
                 </li>
               </ul>
@@ -55,9 +56,19 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 
     <div class="col-span-12" :class="[hasToc ? 'md:col-span-8' : 'md:col-span-10']">
       <div>
-        <h1 class="text-3xl text-primary font-medium">
-          {{ page?.title || 'untitled' }}
-        </h1>
+        <div class="flex justify-between items-center">
+          <h1 class="text-3xl text-primary font-medium">
+            {{ page?.title || 'untitled' }}
+          </h1>
+          <div
+            v-if="page?.since"
+            class="ring-1 ring-inset ring-primary-200 text-primary-500 rounded-md bg-primary-50 font-medium flex items-center gap-1"
+            :class="[standard.padding['sm'], standard.size['2xs']]"
+          >
+            <IconTablerGitMerge class="text-sm -mt-0.5" />
+            v{{ page.since }}
+          </div>
+        </div>
         <p v-if="page?.description" class="text-lg text-neutral-500 dark:text-neutral-400 mt-2">
           {{ page.description }}
         </p>
@@ -126,7 +137,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 }
 
 .surround-btn {
-  @apply  font-medium;
+  @apply font-medium;
 
   div {
     @apply bg-neutral-100 dark:bg-neutral-800 rounded-lg px-8 py-6 w-full h-full flex flex-col gap-0 border border-transparent;

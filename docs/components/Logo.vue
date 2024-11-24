@@ -4,7 +4,7 @@
 
 <template>
   <svg
-    class="w-9 h-9"
+    class="w-8 h-8"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 970 1008"
