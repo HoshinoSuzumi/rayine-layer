@@ -7,6 +7,7 @@ export { default as kbd } from './elements/kbd'
 
 // forms
 export { default as input } from './forms/input'
+export { default as toggle } from './forms/toggle'
 
 // overlays
 export { default as message } from './overlays/message'
