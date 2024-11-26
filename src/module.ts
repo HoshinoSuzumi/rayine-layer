@@ -6,6 +6,7 @@ import {
   addPlugin,
   addComponentsDir,
   addImportsDir,
+  installModule,
 } from '@nuxt/kit'
 import { name, version } from '../package.json'
 import { installTailwind } from './tailwind'
@@ -65,6 +66,7 @@ export default defineNuxtModule<ModuleOptions>({
     createTemplates(_nuxt)
 
     // Modules
+    await installModule('@nuxt/icon')
     installTailwind(_options, _nuxt, resolve)
 
     // Plugins
