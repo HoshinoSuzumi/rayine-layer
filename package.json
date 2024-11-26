@@ -31,6 +31,7 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
+    "@iconify-json/svg-spinners": "^1.2.1",
     "@iconify-json/tabler": "^1.2.8",
     "@nuxt/icon": "^1.8.2",
     "@nuxt/kit": "^3.14.159",
