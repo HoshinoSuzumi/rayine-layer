@@ -114,8 +114,6 @@ export default defineComponent({
         textarea.value.rows = props.maxrows ? Math.min(computedRows, props.maxrows) : computedRows
       }
       textarea.value.style.overflow = overflowBefore
-
-      console.log('computedRows', computedRows)
     }
 
     const updateValue = (value: string) => {
