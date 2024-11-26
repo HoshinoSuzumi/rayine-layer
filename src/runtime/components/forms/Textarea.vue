@@ -58,6 +58,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     class: {
       type: String,
       default: '',
@@ -182,8 +186,9 @@ export default defineComponent({
       :class="baseClass"
       :rows="rows"
       :placeholder="placeholder"
-      v-bind="attrs"
+      :disabled="disabled"
       :value="modelValue"
+      v-bind="attrs"
       @input="onInput"
       @change="onChange"
       @blur="onBlur"
