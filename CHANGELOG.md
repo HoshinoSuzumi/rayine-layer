@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.7](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.3.6...v1.3.7) (2024-11-26)
+
+### Features
+
+* **button:** add `icon` and `loadingIcon` prop support ([2996866](https://github.com/HoshinoSuzumi/rayine-ui/commit/2996866b9adfed79fa64afa8ccd7c1fbfa88d059))
+
 ## [1.3.6](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.3.5...v1.3.6) (2024-11-26)
 
 ## [1.3.5](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.3.4...v1.3.5) (2024-11-26)
