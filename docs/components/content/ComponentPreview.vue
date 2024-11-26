@@ -179,6 +179,7 @@ const { data: codeRender } = await useAsyncData(`${componentName}-code-renderer-
           :type="prop.type === 'number' ? 'number' : 'text'"
           variant="plain"
           :padded="false"
+          :ui="{ rounded: 'rounded-none' }"
           placeholder="type something..."
           @update:model-value="val => componentProps[prop.name] = prop.type === 'number' ? Number(val) : val"
         />

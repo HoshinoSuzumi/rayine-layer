@@ -50,6 +50,7 @@ export default defineNuxtConfig({
   componentMeta: {
     exclude: [
       '@nuxt/content',
+      '@nuxt/icon',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
       'nuxt/dist',
@@ -61,6 +62,11 @@ export default defineNuxtConfig({
       slots: true,
       events: false,
       exposed: false,
+    },
+  },
+  icon: {
+    clientBundle: {
+      scan: true,
     },
   },
   rayui: {
@@ -77,10 +83,5 @@ export default defineNuxtConfig({
         },
       },
     },
-  },
-  icon: {
-    clientBundle: {
-      scan: true
-    }
   },
 })

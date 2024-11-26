@@ -65,7 +65,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
             class="ring-1 ring-inset ring-primary-200 dark:ring-primary-900 text-primary-500 dark:text-primary-400 rounded-md bg-primary-50 dark:bg-primary-900 font-medium flex items-center gap-1"
             :class="[standard.padding['sm'], standard.size['2xs']]"
           >
-            <IconTablerGitMerge class="text-sm -mt-0.5" />
+            <RayIcon name="tabler:git-merge" class="text-sm -mt-0.5" />
             v{{ page.since }}
           </div>
         </div>

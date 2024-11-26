@@ -1,12 +1,4 @@
 <script setup lang="ts">
-import FileTypeVue from '../../icon/VscodeIconsFileTypeVue.vue'
-import FileTypeTypescript from '../../icon/VscodeIconsFileTypeTypescriptOfficial.vue'
-import FileTypeJavascript from '../../icon/VscodeIconsFileTypeJsOfficial.vue'
-import TablerTerminal from '../../icon/TablerTerminal.vue'
-import TablerFile from '~/components/icon/TablerFile.vue'
-import VscodeIconsFileTypeJson from '~/components/icon/VscodeIconsFileTypeJson.vue'
-import VscodeIconsFileTypeNuxt from '~/components/icon/VscodeIconsFileTypeNuxt.vue'
-
 const props = defineProps({
   code: {
     type: String,
@@ -38,29 +30,39 @@ const props = defineProps({
   },
 })
 
-const mapIconLanguage = {
-  'default': TablerFile,
-  'vue': FileTypeVue,
-  'vue-html': FileTypeVue,
-  'bash': TablerTerminal,
-  'sh': TablerTerminal,
-  'ts': FileTypeTypescript,
-  'js': FileTypeJavascript,
-  'json': VscodeIconsFileTypeJson,
+const iconNameLangMapping: Record<string, string> = {
+  'default': 'tabler:file',
+  'vue': 'vscode-icons:file-type-vue',
+  'vue-html': 'vscode-icons:file-type-vue',
+  'bash': 'tabler:terminal',
+  'sh': 'tabler:terminal',
+  'ts': 'vscode-icons:file-type-typescript-official',
+  'js': 'vscode-icons:file-type-js-official',
+  'json': 'vscode-icons:file-type-json',
 }
 
-const mapIconFilename = {
-  'nuxt.config.ts': VscodeIconsFileTypeNuxt,
+const iconNameFilenameMapping: Record<string, string> = {
+  'nuxt.config.ts': 'vscode-icons:file-type-nuxt',
 }
 
-const resolveIcon = computed(() => {
-  if (props.filename) {
-    if (props.filename.endsWith('.vue')) return FileTypeVue
-
-    const icon = mapIconFilename[props.filename as keyof typeof mapIconFilename]
-    if (icon) return icon
+const resolvedIconName = computed(() => {
+  if (!props.language) {
+    return iconNameLangMapping['default']
   }
-  return mapIconLanguage[props.language as keyof typeof mapIconLanguage]
+
+  if (props.filename.endsWith('.vue')) {
+    return iconNameLangMapping['vue']
+  }
+
+  if (iconNameFilenameMapping[props.filename]) {
+    return iconNameFilenameMapping[props.filename]
+  }
+
+  if (iconNameLangMapping[props.language]) {
+    return iconNameLangMapping[props.language]
+  }
+
+  return iconNameLangMapping['default']
 })
 </script>
 
@@ -68,7 +70,7 @@ const resolveIcon = computed(() => {
   <div data-prose-pre class="pre rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
     <div v-if="filename" class="p-4 py-2 border-b border-neutral-200 dark:border-neutral-700">
       <span class="flex items-center gap-1">
-        <component :is="resolveIcon" v-if="language" class="inline" />
+        <RayIcon v-if="resolvedIconName" :name="resolvedIconName" class="inline" />
         <span class="text-sm text-neutral-500 dark:text-neutral-400">{{ filename }}</span>
       </span>
     </div>
