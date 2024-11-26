@@ -10,6 +10,7 @@ import { useRayUI } from '#build/imports'
 const config = button
 
 export default defineComponent({
+  inheritAttrs: false,
   props: {
     ...nuxtLinkProps,
     class: {
@@ -60,6 +61,10 @@ export default defineComponent({
       type: String,
       default: () => config.default.loadingIcon,
     },
+    icon: {
+      type: String,
+      default: null,
+    },
     ui: {
       type: Object as PropType<DeepPartial<typeof config> & { strategy?: Strategy }>,
       default: () => ({}),
@@ -77,6 +82,7 @@ export default defineComponent({
         ui.value.base,
         ui.value.font,
         ui.value.rounded,
+        ui.value.gap[props.size],
         ui.value.size[props.size],
         props.padded && ui.value.padding[props.size],
         variant?.replaceAll('{color}', props.color),
@@ -84,12 +90,23 @@ export default defineComponent({
       ), props.class)
     })
 
+    const iconClass = computed(() => {
+      return twJoin(
+        ui.value.icon.base,
+        ui.value.icon.size[props.size],
+      )
+    })
+
+    const leadingIconName = computed(() => props.loading ? props.loadingIcon : props.icon)
+
     return {
       // eslint-disable-next-line vue/no-dupe-keys
       ui,
       attrs,
       extProps,
       buttonClass,
+      iconClass,
+      leadingIconName,
     }
   },
 })
@@ -98,7 +115,7 @@ export default defineComponent({
 <template>
   <RayLink type="button" :disabled="disabled || loading" :class="buttonClass" v-bind="{ ...extProps, ...attrs }">
     <slot name="leading" :disabled="disabled" :loading="loading">
-      <IconSpinner v-if="loading" class="mr-1" />
+      <RayIcon v-if="leadingIconName" :name="leadingIconName" :class="iconClass" />
     </slot>
     <slot>
       <span v-if="label">{{ label }}</span>

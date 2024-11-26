@@ -1,7 +1,7 @@
 import { standard } from '..'
 
 export default {
-  base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-70 aria-disabled:cursor-not-allowed aria-disabled:opacity-70 flex-shrink-0 transition',
+  base: 'focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-70 aria-disabled:cursor-not-allowed aria-disabled:opacity-70 flex-shrink-0 transition text-left break-all line-clamp-1',
   rounded: 'rounded-lg',
   font: 'font-medium',
   block: 'w-full flex justify-center items-center',
@@ -15,13 +15,15 @@ export default {
   square: {
     ...standard.square,
   },
+  gap: {
+    ...standard.gap,
+  },
   icon: {
     base: 'flex-shrink-0',
-    loading: 'animate-spin',
     size: {
       '2xs': 'h-4 w-4',
       'xs': 'h-4 w-4',
-      'sm': 'h-5 w-5',
+      'sm': 'h-4 w-4',
       'md': 'h-5 w-5',
       'lg': 'h-5 w-5',
       'xl': 'h-6 w-6',
@@ -51,6 +53,6 @@ export default {
     size: 'sm',
     color: 'primary',
     variant: 'solid',
-    loadingIcon: 'loading',
+    loadingIcon: 'svg-spinners:90-ring-with-bg',
   },
 }

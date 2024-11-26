@@ -91,6 +91,18 @@ props:
 Button
 ::
 
+### Icon
+
+::ComponentPreview
+---
+props:
+  icon: tabler:adjustments
+  size: sm
+  loading: true
+---
+Settings
+::
+
 ### Loading
 
 ::ComponentPreview
