@@ -114,7 +114,14 @@ props:
 Button
 ::
 
-## Config
+## API
+
+### Props
+
+::ComponentProps
+::
+
+### Config
 
 ::ComponentDefaults
 ::

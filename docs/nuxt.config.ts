@@ -60,7 +60,7 @@ export default defineNuxtConfig({
       type: false,
       props: true,
       slots: true,
-      events: false,
+      events: true,
       exposed: false,
     },
   },

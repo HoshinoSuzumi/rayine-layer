@@ -176,7 +176,14 @@ const modal = ref<string>("");
 </template>
 ```
 
-## Config
+## API
+
+### Props
+
+::ComponentProps
+::
+
+### Config
 
 ::ComponentDefaults
 ::

@@ -44,7 +44,14 @@ props:
 K
 ::
 
-## Config
+## API
+
+### Props
+
+::ComponentProps
+::
+
+### Config
 
 ::ComponentDefaults
 ::

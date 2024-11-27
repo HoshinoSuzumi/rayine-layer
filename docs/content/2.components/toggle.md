@@ -63,7 +63,14 @@ props:
 ---
 ::
 
-## Config
+## API
+
+### Props
+
+::ComponentProps
+::
+
+### Config
 
 ::ComponentDefaults
 ::

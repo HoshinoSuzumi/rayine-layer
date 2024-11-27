@@ -82,7 +82,14 @@ slots:
 :RayButton{icon="tabler:message" label="messages" color="invert"}
 ::
 
-## Config
+## API
+
+### Props
+
+::ComponentProps
+::
+
+### Config
 
 ::ComponentDefaults
 ::
