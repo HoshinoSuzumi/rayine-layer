@@ -23,11 +23,9 @@ const runtimeConfig = useRuntimeConfig().public
       </h1>
     </NuxtLink>
     <div class="flex items-center gap-4">
-      <NuxtLink
-        to="https://github.com/HoshinoSuzumi/rayine-ui"
-        target="_blank"
-        class="text-neutral-400 dark:text-neutral-500"
-      >GitHub</NuxtLink>
+      <RayButton to="https://github.com/HoshinoSuzumi/rayine-ui" target="_blank" icon="tabler:brand-github" variant="ghost">
+        GitHub
+      </RayButton>
     </div>
   </header>
 </template>
