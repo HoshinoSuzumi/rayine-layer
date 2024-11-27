@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.3.8](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.3.7...v1.3.8) (2024-11-27)
+
 ## [1.3.7](https://github.com/HoshinoSuzumi/rayine-ui/compare/v1.3.6...v1.3.7) (2024-11-26)
 
 ### Features
