@@ -24,7 +24,7 @@ const props = defineProps({
   },
   slots: {
     type: Object,
-    default: () => ({}),
+    default: null,
   },
   options: {
     type: Array as PropType<{ name: string, values: string[], restriction: 'expected' | 'included' | 'excluded' | 'only' }[]>,
@@ -119,7 +119,22 @@ const code = computed(() => {
     code += ` ${(typeof v === 'boolean' && (k === 'modelValue' || v !== true)) || typeof v === 'number' || typeof v === 'object' ? ':' : ''}${k === 'modelValue' ? 'model-value' : kebabCase(k)}${k !== 'modelValue' && typeof v === 'boolean' && !!v ? '' : `="${typeof v === 'object' ? renderObject(v) : v}"`}`
   }
 
-  code += `/>\n</template>
+  if (props.slots) {
+    code += `>
+  ${Object.entries(props.slots).map(([key, value]) => {
+    return key === 'default'
+      ? value
+      : `<template #${key}>
+    ${value}
+  </template>`
+  }).join('\n  ')}
+</${componentName}>`
+  }
+  else {
+    code += ' />'
+  }
+
+  code += `\n</template>
 \`\`\`
   `
   return code
@@ -176,11 +191,12 @@ const { data: codeRender } = await useAsyncData(`${componentName}-code-renderer-
           v-else
           :id="`${prop.name}-prop`"
           :model-value="componentProps[prop.name]"
-          :type="prop.type === 'number' ? 'number' : 'text'"
+          :type="prop.type.includes('number') ? 'number' : 'text'"
           variant="plain"
           :padded="false"
           :ui="{ rounded: 'rounded-none' }"
-          placeholder="type something..."
+          :placeholder="prop.type"
+          autocomplete="off"
           @update:model-value="val => componentProps[prop.name] = prop.type === 'number' ? Number(val) : val"
         />
       </div>
