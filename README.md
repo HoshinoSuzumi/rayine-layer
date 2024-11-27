@@ -1,6 +1,6 @@
 # Rayine UI
 
-![rayine-ui](https://socialify.git.ci/HoshinoSuzumi/rayine-ui/image?description=1&issues=1&logo=https%3A%2F%2Frayui.uniiem.com%2Frayine_no_shadow.svg&name=1&owner=1&pulls=1&stargazers=1&theme=Light)
+![rayine-ui](https://socialify.git.ci/HoshinoSuzumi/rayine-ui/image?description=1&font=Rokkitt&issues=1&logo=https%3A%2F%2Frayui.uniiem.com%2Frayine_no_shadow.svg&name=1&owner=1&pattern=Brick%20Wall&pulls=1&stargazers=1&theme=Light)
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
