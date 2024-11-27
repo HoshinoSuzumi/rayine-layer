@@ -4,6 +4,7 @@ export { default as standard } from './standard'
 // elements
 export { default as button } from './elements/button'
 export { default as kbd } from './elements/kbd'
+export { default as mark } from './elements/mark'
 
 // forms
 export { default as input } from './forms/input'
