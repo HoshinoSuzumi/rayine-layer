@@ -42,7 +42,7 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => meta?.meta
           <ProseCodeInline v-if="prop.type">
             {{ prop.type }}
           </ProseCodeInline>
-          <MDC v-if="prop.description" :value="prop.description" class="mt-1" />
+          <MDC v-if="prop.description" :value="prop.description" class="text-gray-500 dark:text-gray-400" />
         </ProseTd>
       </ProseTr>
     </ProseTbody>
