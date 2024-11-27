@@ -70,7 +70,7 @@ props:
 ::ComponentProps
 ::
 
-### Config
+### Theme
 
 ::ComponentDefaults
 ::

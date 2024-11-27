@@ -149,7 +149,7 @@ const modal = ref<string>("");
 ::ComponentProps
 ::
 
-### Config
+### Theme
 
 ::ComponentDefaults
 ::

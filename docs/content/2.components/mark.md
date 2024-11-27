@@ -89,7 +89,7 @@ slots:
 ::ComponentProps
 ::
 
-### Config
+### Theme
 
 ::ComponentDefaults
 ::

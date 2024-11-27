@@ -121,7 +121,7 @@ Button
 ::ComponentProps
 ::
 
-### Config
+### Theme
 
 ::ComponentDefaults
 ::

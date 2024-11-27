@@ -51,7 +51,7 @@ K
 ::ComponentProps
 ::
 
-### Config
+### Theme
 
 ::ComponentDefaults
 ::
