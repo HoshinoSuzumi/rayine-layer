@@ -98,7 +98,7 @@ Button
 props:
   icon: tabler:adjustments
   size: sm
-  loading: true
+  loading: false
 ---
 Settings
 ::
