@@ -1,4 +1,4 @@
-import type { Message, MessageType } from '../types/message'
+import type { Message } from '../types/message'
 import { useState } from '#imports'
 
 export const useMessage = () => {

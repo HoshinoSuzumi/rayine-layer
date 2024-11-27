@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { camelCase, upperFirst } from 'scule'
 import json5 from 'json5'
-import * as config from '#rayui/ui.config'
+import * as config from '#rayui/themes'
 
 const route = useRoute()
 

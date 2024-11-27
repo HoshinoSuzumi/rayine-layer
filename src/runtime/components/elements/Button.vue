@@ -3,7 +3,7 @@ import { twJoin, twMerge } from 'tailwind-merge'
 import { computed, defineComponent, toRef, type PropType } from 'vue'
 import { getNonUndefinedValuesFromObject } from '../../utils'
 import { nuxtLinkProps } from '../../utils/link'
-import { button } from '../../ui.config'
+import { button } from '../../themes'
 import type { ButtonColor, ButtonSize, ButtonVariant, DeepPartial, Strategy } from '../../types/index'
 import { useRayUI } from '#build/imports'
 

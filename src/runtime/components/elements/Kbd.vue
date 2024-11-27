@@ -1,7 +1,7 @@
 <script lang="ts">
 import { computed, defineComponent, toRef, type PropType } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
-import { kbd } from '../../ui.config'
+import { kbd } from '../../themes'
 import type { DeepPartial, KbdSize, Strategy } from '../../types'
 import { useRayUI } from '#build/imports'
 

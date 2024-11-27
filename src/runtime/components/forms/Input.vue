@@ -2,7 +2,7 @@
 import { computed, defineComponent, toRef, type PropType } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
 import defu from 'defu'
-import { input } from '../../ui.config'
+import { input } from '../../themes'
 import type { DeepPartial, InputColor, InputModelModifiers, InputSize, InputType, InputVariant, Strategy } from '../../types/index'
 import { onMounted, ref, useRayUI } from '#build/imports'
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { withoutTrailingSlash } from 'ufo'
-import { standard } from '#rayui/ui.config'
+import { standard } from '#rayui/themes'
 
 const route = useRoute()
 

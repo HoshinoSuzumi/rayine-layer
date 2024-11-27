@@ -1,7 +1,7 @@
 <script lang="ts">
 import { computed, defineComponent, toRef, type PropType } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
-import { mark } from '../../ui.config'
+import { mark } from '../../themes'
 import type { MarkColor, MarkPosition, MarkSize } from '../../types'
 import { useRayUI } from '#build/imports'
 

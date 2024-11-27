@@ -2,7 +2,7 @@
 import { computed, defineComponent, onMounted, ref, toRef, watch, type PropType } from 'vue'
 import { twMerge, twJoin } from 'tailwind-merge'
 import defu from 'defu'
-import { textarea } from '../../ui.config'
+import { textarea } from '../../themes'
 import type { DeepPartial, Strategy, TextareaColor, TextareaModelModifiers, TextareaSize, TextareaVariant } from '../../types'
 import { useRayUI } from '#build/imports'
 

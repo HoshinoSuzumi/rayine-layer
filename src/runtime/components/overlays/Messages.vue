@@ -1,7 +1,7 @@
 <script lang="ts">
 import { computed, defineComponent, toRef, type PropType } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
-import { messages } from '../../ui.config'
+import { messages } from '../../themes'
 import type { DeepPartial, Message, Strategy } from '../../types/index'
 import { useState } from '#imports'
 import { useRayUI } from '#build/imports'

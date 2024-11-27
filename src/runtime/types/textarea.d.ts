@@ -1,5 +1,5 @@
 import type { AppConfig } from '@nuxt/schema'
-import type { textarea } from '../ui.config'
+import type { textarea } from '../themes'
 import type { ExtractDeepKey } from './utils'
 import type colors from '#ray-colors'
 

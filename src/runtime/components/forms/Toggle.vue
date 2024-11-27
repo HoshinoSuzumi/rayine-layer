@@ -1,7 +1,7 @@
 <script lang="ts">
 import { computed, defineComponent, toRef, type PropType } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
-import { toggle } from '../../ui.config'
+import { toggle } from '../../themes'
 import type { DeepPartial, Strategy, ToggleColor, ToggleSize } from '../../types'
 import { useRayUI } from '#build/imports'
 

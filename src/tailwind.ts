@@ -49,7 +49,7 @@ export const installTailwind = (
               resolve(runtimePath, 'components/**/*.{vue,mjs,ts}'),
             )},
             ${JSON.stringify(
-              resolve(runtimePath, 'ui.config/**/*.{mjs,js,ts}'),
+              resolve(runtimePath, 'themes/**/*.{mjs,js,ts}'),
             )}
           ],
         },

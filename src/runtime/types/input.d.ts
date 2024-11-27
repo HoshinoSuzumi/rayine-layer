@@ -1,5 +1,5 @@
 import type { AppConfig } from 'nuxt/schema'
-import type { input } from '../ui.config'
+import type { input } from '../themes'
 import type { ExtractDeepKey } from './utils'
 import type colors from '#ray-colors'
 

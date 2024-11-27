@@ -1,5 +1,5 @@
 import type { AppConfig } from '@nuxt/schema'
-import type { mark } from '../ui.config'
+import type { mark } from '../themes'
 import type { ExtractDeepKey } from './utils'
 import type colors from '#ray-colors'
 

@@ -1,5 +1,5 @@
 import type { AppConfig } from 'nuxt/schema'
-import type { button } from '../ui.config'
+import type { button } from '../themes'
 import type { ExtractDeepObject, NestedKeyOf, ExtractDeepKey } from './utils'
 import type colors from '#ray-colors'
 

@@ -1,5 +1,5 @@
 import type { AppConfig } from 'nuxt/schema'
-import type { kbd } from '../ui.config'
+import type { kbd } from '../themes'
 import type { ExtractDeepKey } from './utils'
 
 export type KbdSize =
