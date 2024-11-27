@@ -81,3 +81,8 @@ slots:
 #default
 :RayButton{icon="tabler:message" label="messages" color="invert"}
 ::
+
+## Config
+
+::ComponentDefaults
+::
