@@ -9,15 +9,19 @@ export default {
   type: {
     success: {
       color: 'emerald',
+      icon: 'tabler:circle-check',
     },
     warning: {
       color: 'amber',
+      icon: 'tabler:alert-circle',
     },
     error: {
       color: 'red',
+      icon: 'tabler:circle-x',
     },
     info: {
       color: 'blue',
+      icon: 'tabler:info-circle',
     },
   },
   default: {

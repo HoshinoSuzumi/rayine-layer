@@ -48,6 +48,20 @@ props:
 ---
 ::
 
+### Icon
+
+Or you can use the `icon` prop to change the icon of the message.
+
+::ComponentPreview
+---
+privateProps:
+  content: Thanks for activating
+props:
+  icon: tabler:circle-key
+---
+::
+
+
 ### Color
 
 Use the `color` prop to change the color of the message.

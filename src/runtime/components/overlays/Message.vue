@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref, onMounted, defineComponent, type PropType, toRef, computed } from 'vue'
+import { onMounted, defineComponent, type PropType, toRef, computed } from 'vue'
 import { twJoin, twMerge } from 'tailwind-merge'
 import { message } from '../../themes'
 import type { DeepPartial, Message, MessageColor, MessageType, Strategy } from '../../types/index'
@@ -16,6 +16,10 @@ export default defineComponent({
     color: {
       type: String as PropType<MessageColor>,
       default: undefined,
+    },
+    icon: {
+      type: String,
+      default: null,
     },
     duration: {
       type: Number,
@@ -63,6 +67,10 @@ export default defineComponent({
       }
     })
 
+    const iconName = computed(() => {
+      return props.icon || ui.value.type[props.type]?.icon || null
+    })
+
     onMounted(() => {
       setTimeout(() => {
         message.remove(messageBody.value.id)
@@ -75,6 +83,7 @@ export default defineComponent({
       attrs,
       messageBody,
       containerClass,
+      iconName,
     }
   },
 })
@@ -83,10 +92,7 @@ export default defineComponent({
 <template>
   <div :class="ui.wrapper" v-bind="attrs">
     <div :class="containerClass">
-      <IconCircleSuccess v-if="messageBody?.type === 'success'" class="text-xl" />
-      <IconCircleWarning v-if="messageBody?.type === 'warning'" class="text-xl" />
-      <IconCircleError v-if="messageBody?.type === 'error'" class="text-xl" />
-      <IconCircleInfo v-if="messageBody?.type === 'info'" class="text-xl" />
+      <RayIcon v-if="iconName" :name="iconName" class="text-xl" />
       <span>
         {{ messageBody.content }}
       </span>
