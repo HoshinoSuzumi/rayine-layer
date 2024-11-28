@@ -5,5 +5,6 @@ export * from './textarea'
 export * from './kbd'
 export * from './toggle'
 export * from './mark'
+export * from './select'
 
 export * from './utils'

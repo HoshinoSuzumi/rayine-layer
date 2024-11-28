@@ -10,6 +10,7 @@ export { default as mark } from './elements/mark'
 export { default as input } from './forms/input'
 export { default as textarea } from './forms/textarea'
 export { default as toggle } from './forms/toggle'
+export { default as select } from './forms/select'
 
 // overlays
 export { default as message } from './overlays/message'
